@@ -6,8 +6,8 @@ title: Sakhineti Praveena | JdeRobot x GSoC2025 # the website title (if blank, f
 first_name: Sakhineti Praveena
 middle_name:  " | JdeRobot x " 
 last_name: GSoC2025
-contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+# contact_note: >
+  # You can even add a little note about which of these is the best way to reach you.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >
@@ -123,13 +123,13 @@ disqus_shortname: al-folio # put your disqus shortname
 # External sources.
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
-external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
+# external_sources:
+#   - name: medium.com
+#     rss_url: https://medium.com/@al-folio/feed
+#   - name: Google Blog
+#     posts:
+#       - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
+#         published_date: 2024-05-14
 
 # -----------------------------------------------------------------------------
 # Newsletter
@@ -356,7 +356,7 @@ enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
-enable_navbar_social: false # enables displaying social links in the navbar on the about page
+# enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
 enable_medium_zoom: true # enables image zoom feature (as on medium.com)
 enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
