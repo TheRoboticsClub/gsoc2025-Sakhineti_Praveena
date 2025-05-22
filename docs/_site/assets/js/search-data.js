@@ -16,12 +16,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/blog/";
           },
-        },{id: "books-the-godfather",
-          title: 'The Godfather',
-          description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/al-folio/books/the_godfather/";
-            },},{
+        },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',

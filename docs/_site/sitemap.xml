@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/al-folio/books/the_godfather/</loc>
-<lastmod>2025-05-22T21:29:41+05:30</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/al-folio/</loc>
 </url>
 <url>
@@ -24,30 +20,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/al-folio/teaching/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/2025/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/tag/top-100/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/classics/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/crime/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/historical-fiction/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/mystery/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/novels/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/al-folio/books/category/thriller/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/al-folio/blog/</loc>
