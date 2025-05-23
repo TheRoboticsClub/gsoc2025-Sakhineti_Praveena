@@ -18,7 +18,7 @@ ninja.data = [{
           },
         },{id: "post-community-bonding-week-1",
         
-          title: "Community Bonding Week 1",
+          title: "Community Bonding Week-1",
         
         description: "",
         section: "Posts",
