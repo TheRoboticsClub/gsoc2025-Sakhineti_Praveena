@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://alshedivat.github.io/al-folio/sitemap.xml
+Sitemap: https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/sitemap.xml
