@@ -7,16 +7,27 @@ ninja.data = [{
     title: "about",
     section: "Navigation",
     handler: () => {
-      window.location.href = "/al-folio/";
+      window.location.href = "/gsoc2025-Sakhineti_Praveena/";
     },
   },{id: "nav-blog",
           title: "blog",
           description: "",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/al-folio/blog/";
+            window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/";
           },
-        },{
+        },{id: "post-community-bonding-week-1",
+        
+          title: "Community Bonding Week 1",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/";
+          
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
