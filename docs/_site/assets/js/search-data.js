@@ -16,7 +16,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/";
           },
-        },{id: "post-community-bonding-week-1",
+        },{id: "post-community-bonding-week-2",
+        
+          title: "Community Bonding Week-2",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/";
+          
+        },
+      },{id: "post-community-bonding-week-1",
         
           title: "Community Bonding Week-1",
         
