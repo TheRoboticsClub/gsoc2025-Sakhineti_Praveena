@@ -1,5 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-05-30T16:38:48+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Community Bonding Week-2</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/" rel="alternate" type="text/html" title="Community Bonding Week-2" /><published>2025-05-30T00:00:00+05:30</published><updated>2025-05-30T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-09T11:04:48+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 1 (Jun 01 - Jun 08)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/" rel="alternate" type="text/html" title="Week 1 (Jun 01 - Jun 08)" /><published>2025-06-09T00:00:00+05:30</published><updated>2025-06-09T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<p>This week, we discussed the implementation plan in more detail. David suggested that I start with refactoring the <code class="language-plaintext highlighter-rouge">dataset.py</code> module as a solid entry point into the codebase. Once that is complete, I can gradually move on to refactoring the model class and metrics module.</p>
+
+<p>They also encouraged me to open a draft PR early so that my progress can be continuously reviewed and improved. David also mentioned an exciting use case for our tool: it will be used to evaluate a trash detection model, making the detection metrics we build directly impactful.</p>
+
+<hr />
+
+<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Refactor dataset.py</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Refactor model.py</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Explore Streamlit (if time permits)</li>
+</ul>
+
+<hr />
+
+<h2 id="progress">Progress</h2>
+
+<p>I started this week by refactoring the dataset classes. I followed the structure David and I had discussed during the application stage.</p>
+
+<p>The older class structure looked like this:</p>
+
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/oldclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
+
+<p>To support detection models more effectively, I’ve reorganized the class hierarchy:</p>
+
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/newclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
+
+<p>I began by identifying the common functionalities shared between segmentation and detection tasks. These were moved into a new base class, <code class="language-plaintext highlighter-rouge">PerceptionDataset</code>. In this class, I’ve implemented methods like: <code class="language-plaintext highlighter-rouge">__init__</code> , <code class="language-plaintext highlighter-rouge">__len__</code> , <code class="language-plaintext highlighter-rouge">make_fname_global</code> and <code class="language-plaintext highlighter-rouge">append</code> (assuming the ontology structure is the same as segmentation for now)</p>
+
+<p>If there is some extra info per class in the datasets, the logic in <code class="language-plaintext highlighter-rouge">append</code> can be overridden later in the <code class="language-plaintext highlighter-rouge">DetectionDataset</code> class.</p>
+
+<p>Next, I defined the functions specific to segmentation and detection within their respective subclasses. I also incorporated some of the model refactoring work I had prepared during the application phase and finished up the changes.</p>
+
+<p>I’ve raised a <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312"><strong>draft PR</strong></a> that includes all these changes. Following David’s suggestion, I split the monolithic class into multiple files to improve modularity and maintainability.</p>
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/filestructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
+
+<hr />
+
+<h2 id="going-ahead">Going ahead</h2>
+
+<p>I plan to thoroughly test all the changes I have made. If everything is alright I am thinking defining coco.py and pascalvoc.py could be a potential next step. I also didn’t get much time to explore streamlit this week, hoping to do that as well this coming week.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Community Bonding Week-2</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/" rel="alternate" type="text/html" title="Community Bonding Week-2" /><published>2025-05-30T00:00:00+05:30</published><updated>2025-05-30T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <p>Started this week with the usual weekly sync up with the mentors, where we discussed various aspects of the project and my progress so far.  David encouraged me to play around a bit with the datasets, download, parse and implement inference, even if it’s simple at this stage.</p>
 

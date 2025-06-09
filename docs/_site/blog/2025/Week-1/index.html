@@ -16,7 +16,9 @@
 <title>
   
   
-    blog | Sakhineti Praveena | JdeRobot x GSoC2025
+    
+      Week 1 (Jun 01 - Jun 08) | Sakhineti Praveena | JdeRobot x GSoC2025
+    
   
 </title>
 <meta name="author" content="Sakhineti Praveena  | JdeRobot x  GSoC2025">
@@ -58,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -144,14 +146,10 @@
             
           
             
-          
-            
               
                 
                 <li class="nav-item active">
                   <a class="nav-link" href="/gsoc2025-Sakhineti_Praveena/blog/">blog
-                    
-                      <span class="sr-only">(current)</span>
                     
                   </a>
                 </li>
@@ -197,157 +195,142 @@
     <!-- Content -->
     <div class="container mt-5" role="main">
       
-        <div class="post">
+        
 
 
 
 
 
 
-  <div class="header-bar">
-    <h1>GSoC2025</h1>
-    <h2>Extending DetectionMetrics for object detection, building a GUI and setting up CI workflow.</h2>
-  </div>
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">Week 1 (Jun 01 - Jun 08)</h1>
+    <p class="post-meta">
+      Created on June 09, 2025
+      by Sakhineti Praveena
+      
+      
+    </p>
+    <p class="post-tags">
+      
+        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
+      
+      
+
+      
+          ·  
+        
+          
+            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog"> <i class="fa-solid fa-tag fa-sm"></i> blog</a>
+          
+          
+        
+      
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<p>This week, we discussed the implementation plan in more detail. David suggested that I start with refactoring the <code class="language-plaintext highlighter-rouge">dataset.py</code> module as a solid entry point into the codebase. Once that is complete, I can gradually move on to refactoring the model class and metrics module.</p>
+
+<p>They also encouraged me to open a draft PR early so that my progress can be continuously reviewed and improved. David also mentioned an exciting use case for our tool: it will be used to evaluate a trash detection model, making the detection metrics we build directly impactful.</p>
+
+<hr>
+
+<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
+
+<ul class="task-list">
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Refactor dataset.py</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Refactor model.py</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Explore Streamlit (if time permits)</li>
+</ul>
+
+<hr>
+
+<h2 id="progress">Progress</h2>
+
+<p>I started this week by refactoring the dataset classes. I followed the structure David and I had discussed during the application stage.</p>
+
+<p>The older class structure looked like this:</p>
+
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/oldclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+<p>To support detection models more effectively, I’ve reorganized the class hierarchy:</p>
+
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/newclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+<p>I began by identifying the common functionalities shared between segmentation and detection tasks. These were moved into a new base class, <code class="language-plaintext highlighter-rouge">PerceptionDataset</code>. In this class, I’ve implemented methods like: <code class="language-plaintext highlighter-rouge">__init__</code> , <code class="language-plaintext highlighter-rouge">__len__</code> , <code class="language-plaintext highlighter-rouge">make_fname_global</code> and <code class="language-plaintext highlighter-rouge">append</code> (assuming the ontology structure is the same as segmentation for now)</p>
+
+<p>If there is some extra info per class in the datasets, the logic in <code class="language-plaintext highlighter-rouge">append</code> can be overridden later in the <code class="language-plaintext highlighter-rouge">DetectionDataset</code> class.</p>
+
+<p>Next, I defined the functions specific to segmentation and detection within their respective subclasses. I also incorporated some of the model refactoring work I had prepared during the application phase and finished up the changes.</p>
+
+<p>I’ve raised a <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312" rel="external nofollow noopener" target="_blank"><strong>draft PR</strong></a> that includes all these changes. Following David’s suggestion, I split the monolithic class into multiple files to improve modularity and maintainability.</p>
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/filestructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+<hr>
+
+<h2 id="going-ahead">Going ahead</h2>
+
+<p>I plan to thoroughly test all the changes I have made. If everything is alright I am thinking defining coco.py and pascalvoc.py could be a potential next step. I also didn’t get much time to explore streamlit this week, hoping to do that as well this coming week.</p>
+
+
+    </div>
+  </article>
+
   
 
+  
+
+  
+    
+      
+
+  
+    
+    <br>
+    <hr>
+    <br>
+    <ul class="list-disc pl-8"></ul>
+
+    <!-- Adds related posts to the end of an article -->
+    <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2>
+    <p class="mb-2">Here are some more articles you might like to read next:</p>
+  
+
+  <li class="my-2">
+    
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/">Community Bonding Week-2</a>
+    
+  </li>
+
+  
+
+  <li class="my-2">
+    
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">Community Bonding Week-1</a>
+    
+  </li>
 
 
-
-
-
-  <ul class="post-list">
 
     
+  
 
-    
-
-    
-    
-    
-    
-
-    <li>
-
-
-        <h3>
-        
-          <a class="post-title" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/">Week 1 (Jun 01 - Jun 08)</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        3 min read   ·  
-        June 09, 2025
-        
-      </p>
-      <p class="post-tags">
-        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025">
-          <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
-
-          
-
-          
-            ·  
-            
-            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog">
-              <i class="fa-solid fa-tag fa-sm"></i> blog</a>
-              
-              
-          
-    </p>
-
-
-    </li>
-
-    
-
-    
-    
-    
-    
-
-    <li>
-
-
-        <h3>
-        
-          <a class="post-title" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/">Community Bonding Week-2</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        6 min read   ·  
-        May 30, 2025
-        
-      </p>
-      <p class="post-tags">
-        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025">
-          <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
-
-          
-
-          
-            ·  
-            
-            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog">
-              <i class="fa-solid fa-tag fa-sm"></i> blog</a>
-              
-              
-          
-    </p>
-
-
-    </li>
-
-    
-
-    
-    
-    
-    
-
-    <li>
-
-
-        <h3>
-        
-          <a class="post-title" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">Community Bonding Week-1</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        3 min read   ·  
-        May 23, 2025
-        
-      </p>
-      <p class="post-tags">
-        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025">
-          <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
-
-          
-
-          
-            ·  
-            
-            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog">
-              <i class="fa-solid fa-tag fa-sm"></i> blog</a>
-              
-              
-          
-    </p>
-
-
-    </li>
-
-    
-
-  </ul>
-
-
-
-
-
-
+  
+  
 </div>
 
       
