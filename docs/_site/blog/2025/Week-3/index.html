@@ -17,7 +17,7 @@
   
   
     
-      Community Bonding Week-1 | Sakhineti Praveena | JdeRobot x GSoC2025
+      Week 3 (Jun 16 - Jun 22) | Sakhineti Praveena | JdeRobot x GSoC2025
     
   
 </title>
@@ -60,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -204,9 +204,9 @@
 
 <div class="post">
   <header class="post-header">
-    <h1 class="post-title">Community Bonding Week-1</h1>
+    <h1 class="post-title">Week 3 (Jun 16 - Jun 22)</h1>
     <p class="post-meta">
-      Created on May 23, 2025
+      Created on June 23, 2025
       by Sakhineti Praveena
       
       
@@ -232,53 +232,95 @@
   <article class="post-content">
     
     <div id="markdown-content">
-      <p>I am excited to be part of GSoC 2025! This week marks the official start of the program with <strong>community bonding period</strong>, and I couldn’t be more thrilled to dive in.</p>
+      <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
-<p>My project, <strong>“Extend DetectionMetrics: GUI, CI Workflow, and Object Detection”</strong>,  will introduce me to perception model evaluation and give me hands on experience in the field of computer vision. <a href="https://github.com/JdeRobot/DetectionMetrics" rel="external nofollow noopener" target="_blank">DetectionMetrics</a> is a toolkit used for evaluating perception models across various frameworks and datasets. Ironically the latest version of Detectionmetrics currently supports image segmentation model evaluations, during my coding period my objective is to extend its functionality to object detection evaluation, build an interactive user interface and set up the CI workflow. This project is a perfect opportunity for me to gain hands-on experience in <strong>computer vision</strong>, and I’m eager to soak in all the learning that comes with it!</p>
+<p>In this week’s meeting, I began by sharing an update on my current progress. The mentors gave positive feedback and helped clarify the utility functions used in <code class="language-plaintext highlighter-rouge">torch.py</code> for segmentation. David recommended moving some of these utilities to a shared <code class="language-plaintext highlighter-rouge">torch_utils.py</code>, as they are commonly used across modules.</p>
+
+<p>We also discussed the next set of deliverables and finalized this week’s goals. Sergio raised a thoughtful question about our choice of <strong>Streamlit</strong> for the UI. He suggested exploring <strong>Gradio</strong> too as an alternative, especially since it is part of hugging face we would have better support. Based on this, I decided to compare both frameworks and evaluate which suits our needs better.</p>
 
 <hr>
 
-<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>This week, I had my first meeting with my mentors. We spent time getting to know each other and discussing the initial steps of the project. We also reviewed the program’s logistics and clarified expectations moving forward. Communication was emphasized, with Slack chosen as the primary tool for day-to-day discussions and updates.</p>
-
-<p>The discussion also covered the initial steps for the project, such as diving deep and learning about different perception models, standard frameworks and datasets. I was also asked to set up this blog to document my journey through the project and for it to be easy for my mentors to keep a track of my progress.</p>
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
+<h2 id="to-do-for-the-week">To-Do for the Week</h2>
 
 <ul class="task-list">
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Set up a blog website using Jekyll and GitHub Pages</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Finish support for Torch image detection models</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Read and analyze literature on perception models and datasets</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Add metrics for detection model evaluation</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Write this first blog post documenting progress</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled>Create an example notebook for detection metrics evaluation using COCO and Torch models</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Compare Streamlit and Gradio for building the user interface</li>
 </ul>
 
 <hr>
 
-<h2 id="progress-so-far">Progress So Far</h2>
-
-<p>I started the week by solidifying my foundation, I revisited my <strong>undergraduate computer vision coursework</strong>, focusing on:</p>
+<h2 id="progress">Progress</h2>
 
 <ul>
-  <li>Key concepts: <strong>Object Detection</strong>, <strong>Instance Segmentation</strong>, and <strong>Semantic Segmentation</strong>
-</li>
-  <li>Core frameworks: <strong>PyTorch</strong> and <strong>TensorFlow</strong>
-</li>
-  <li>Standard datasets: <strong>COCO</strong>, <strong>Pascal VOC</strong>
-</li>
-  <li>Evaluation metrics: <strong>mAP</strong>, <strong>IoU</strong>
-</li>
+  <li>
+    <p>I began by finishing the <code class="language-plaintext highlighter-rouge">TorchImageDetectionModel</code> class where I implemented the <code class="language-plaintext highlighter-rouge">inference()</code>, <code class="language-plaintext highlighter-rouge">eval()</code>, and <code class="language-plaintext highlighter-rouge">computation_cost()</code> methods for Torch-based object detection models.</p>
+  </li>
+  <li>
+    <p>For detection metrics, I chose to define a new class, instead of extending the existing <code class="language-plaintext highlighter-rouge">MetricsFactory</code> meant for segmentation. I added a <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> in <code class="language-plaintext highlighter-rouge">detection_metrics.py</code>.<br>
+It computes per-class metrics (AP, Precision, Recall, TP, FP and FN) and returns them in a pandas DataFrame. As the last row I have also included mAP in the data frame before returning it. It should look like so :</p>
+  </li>
 </ul>
 
-<p>This foundational review has been super helpful in framing the work ahead and getting me ready for the development phase.</p>
+<div style="text-align: center;">
+<img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-23-Week-3/dataframe.png" alt="Old Class Structure" style="width: 95%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
 
-<p>Then I moved on to setting up this blog — drawing inspiration from past GSoC contributor blogs, I used <strong>Jekyll</strong> , a static site generator, along with <strong>GitHub Pages</strong> for hosting the website. I plan on uploading a blog every week with the progress, updates and learnings.</p>
+<ul>
+  <li>
+    <p>I started creating a sample notebook to test my changes using COCO and a Torch model. Since this is the first time I am running my new changes end-to-end, I was facing minor errors. I started debugging each one and made the necessary changes to the classes. I am currently stuck with an error with respect to the indices mismatching between coco and torch. I will take the mentors help with this in the meeting today.</p>
+  </li>
+  <li>
+    <p>Simultaneously, I began comparing <strong>Gradio</strong> and <strong>Streamlit</strong> to help decide which framework to use for our UI. I have listed down the pros and cons for each below.</p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  #### Gradio
+
+  **Pros**
+  -  Built-in Hosting &amp; Sharing (Gradio Hub, HF Spaces)  
+  -  Easy Jupyter Notebook Integration  
+  -  Seamless Hugging Face, PyTorch, TensorFlow, sklearn integration  
+  -  Clean UI for Inputs/Outputs  
+  -  Embeddable in websites via `iframe`
+
+  **Cons**
+  -  Limited Layout Customization  
+  -  Multi-page support is basic  
+  -  No Built-in Session State  
+  -  Not suitable for dashboards or long-running processes  
+  -  Limited styling/theming support  
+
+  #### Streamlit
+
+  **Pros**
+  -  Ideal for Dashboards, Visualizations, Analytics  
+  -  Native Multi-page App Support  
+  -  Advanced Layouts (columns, tabs, sidebars)  
+  -  Built-in Session State  
+  -  Broad widget &amp; charting support (Altair, Plotly, etc.)  
+  -  Better for scalable, real-time apps  
+
+  **Cons**
+  -  Slightly higher learning curve  
+  -  No one-click public sharing from notebooks  
+  -  Not embeddable in Jupyter  
+  -  No native model integration (manual setup needed)
+</code></pre></div>    </div>
+
+    <p>These are the blogs I referred to <a href="https://uibakery.io/blog/streamlit-vs-gradio?utm_source=chatgpt.com" rel="external nofollow noopener" target="_blank">uibakery.io blog</a>, <a href="https://blog.usro.net/2024/10/gradio-vs-streamlit/?utm_source=chatgpt.com" rel="external nofollow noopener" target="_blank">usro.net blog</a> and <a href="https://myscale.com/blog/streamlit-vs-gradio-ultimate-showdown-python-dashboards/?utm_source=chatgpt.com" rel="external nofollow noopener" target="_blank">myscale.com blog</a></p>
+  </li>
+</ul>
 
 <hr>
 
-<p>I’m looking forward to continuing this journey, learning from my mentors, and contributing meaningfully to the open-source community.</p>
+<h3 id="whats-next">What’s Next?</h3>
+
+<p>For the upcoming week, I’ll work on testing my code changes the end-to-end. Fix any errors I face along the way. I will aim to finish the example notebook I sr=tarted working on. And based on the suggestion from the mentors regarding which UI framework to use, I’ll also start prototyping the user interface.</p>
 
 
     </div>
@@ -306,14 +348,6 @@
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/">Week 3 (Jun 16 - Jun 22)</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
       <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/">Week 2 (Jun 09 - Jun 15)</a>
     
   </li>
@@ -331,6 +365,14 @@
   <li class="my-2">
     
       <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/">Community Bonding Week-2</a>
+    
+  </li>
+
+  
+
+  <li class="my-2">
+    
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">Community Bonding Week-1</a>
     
   </li>
 
