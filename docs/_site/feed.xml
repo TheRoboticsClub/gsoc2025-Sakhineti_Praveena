@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-23T17:06:40+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-23T17:15:20+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
 </subtitle><entry><title type="html">Week 3 (Jun 16 - Jun 22)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/" rel="alternate" type="text/html" title="Week 3 (Jun 16 - Jun 22)" /><published>2025-06-23T00:00:00+05:30</published><updated>2025-06-23T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <p>In this week’s meeting, I began by sharing an update on my current progress. The mentors gave positive feedback and helped clarify the utility functions used in <code class="language-plaintext highlighter-rouge">torch.py</code> for segmentation. David recommended moving some of these utilities to a shared <code class="language-plaintext highlighter-rouge">torch_utils.py</code>, as they are commonly used across both modules.</p>
@@ -41,25 +41,23 @@ It computes per-class metrics (AP, Precision, Recall, TP, FP and FN) and returns
   <li>
     <p>Simultaneously, I began comparing <strong>Gradio</strong> and <strong>Streamlit</strong> to help decide which framework to use for our UI. I have listed down the pros and cons for each below.</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #### Gradio
-
-  **Pros**
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Gradio
+  Pros
   -  Built-in Hosting &amp; Sharing (Gradio Hub, HF Spaces)  
   -  Easy Jupyter Notebook Integration  
   -  Seamless Hugging Face, PyTorch, TensorFlow, sklearn integration  
   -  Clean UI for Inputs/Outputs  
   -  Embeddable in websites via `iframe`
 
-  **Cons**
+  Cons
   -  Limited Layout Customization  
   -  Multi-page support is basic  
   -  No Built-in Session State  
   -  Not suitable for dashboards or long-running processes  
   -  Limited styling/theming support  
 
-  #### Streamlit
-
-  **Pros**
+Streamlit
+  Pros
   -  Ideal for Dashboards, Visualizations, Analytics  
   -  Native Multi-page App Support  
   -  Advanced Layouts (columns, tabs, sidebars)  
@@ -67,7 +65,7 @@ It computes per-class metrics (AP, Precision, Recall, TP, FP and FN) and returns
   -  Broad widget &amp; charting support (Altair, Plotly, etc.)  
   -  Better for scalable, real-time apps  
 
-  **Cons**
+  Cons
   -  Slightly higher learning curve  
   -  No one-click public sharing from notebooks  
   -  Not embeddable in Jupyter  
