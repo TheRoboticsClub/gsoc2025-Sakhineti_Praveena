@@ -17,7 +17,7 @@
   
   
     
-      Week 2 (Jun 09 - Jun 15) | Sakhineti Praveena | JdeRobot x GSoC2025
+      blog - page 2 | Sakhineti Praveena | JdeRobot x GSoC2025
     
   
 </title>
@@ -60,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/page/2/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -148,6 +148,8 @@
             
           
             
+          
+            
               
                 
                 <li class="nav-item active">
@@ -197,184 +199,99 @@
     <!-- Content -->
     <div class="container mt-5" role="main">
       
+        <div class="post">
+
+
+
+
+
+
+  <div class="header-bar">
+    <h1>GSoC2025</h1>
+    <h2>Extending DetectionMetrics for object detection, building a GUI and setting up CI workflow.</h2>
+  </div>
+  
+
+
+
+
+
+
+  <ul class="post-list">
+
+    
+
+    
+
+    
+    
+    
+    
+
+    <li>
+
+
+        <h3>
         
+          <a class="post-title" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">Community Bonding Week-1</a>
+        
+      </h3>
+      <p></p>
+      <p class="post-meta">
+        3 min read   ·  
+        May 23, 2025
+        
+      </p>
+      <p class="post-tags">
+        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025">
+          <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
 
+          
 
-
-
-
-
-<div class="post">
-  <header class="post-header">
-    <h1 class="post-title">Week 2 (Jun 09 - Jun 15)</h1>
-    <p class="post-meta">
-      Created on June 16, 2025
-      by Sakhineti Praveena
-      
-      
+          
+            ·  
+            
+            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog">
+              <i class="fa-solid fa-tag fa-sm"></i> blog</a>
+              
+              
+          
     </p>
-    <p class="post-tags">
-      
-        <a href="/gsoc2025-Sakhineti_Praveena/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>
-      
-      
 
+
+    </li>
+
+    
+
+  </ul>
+
+
+
+  <nav aria-label="Blog page navigation">
+    <ul class="pagination pagination-lg justify-content-center">
+      <li class="page-item ">
+        <a class="page-link" href="/gsoc2025-Sakhineti_Praveena/blog/" tabindex="-1" aria-disabled="1">&lt;</a>
+      </li>
       
-          ·  
         
-          
-            <a href="/gsoc2025-Sakhineti_Praveena/blog/category/blog"> <i class="fa-solid fa-tag fa-sm"></i> blog</a>
-          
-          
+          <li class="page-item ">
+            <a class="page-link" href="/gsoc2025-Sakhineti_Praveena/blog/" title="blog">1</a>
+          </li>
+        
+          <li class="page-item active">
+            <a class="page-link" href="/gsoc2025-Sakhineti_Praveena/blog/page/2/" title="blog - page 2">2</a>
+          </li>
         
       
-    </p>
-  </header>
-
-  <article class="post-content">
-    
-    <div id="markdown-content">
-      <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>We discussed about the progress made in the previous week where I have refactored dataset and model classes. I also raised an issue I encountered during testing: in one of the examples, the inference output appeared distorted compared to earlier results. David mentioned he would look into it on his end(which was fixed later that week through <a href="https://github.com/JdeRobot/DetectionMetrics/pull/314" rel="external nofollow noopener" target="_blank">Issue #314</a>).</p>
-
-<p>Another topic was the current file structure. Right now, both the <code class="language-plaintext highlighter-rouge">dataset</code> and <code class="language-plaintext highlighter-rouge">model</code> directories have a lot of files, and David suggested we may consider restructuring them later as the project evolves. Overall, the feedback from mentors was positive, and we moved ahead with planning goals for the coming week.</p>
-
-<hr>
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
-<ul class="task-list">
-  <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Add support for COCO dataset</li>
-  <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled>Add support for Torch detection models (Partially done)</li>
-  <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled>Explore Streamlit if time permits</li>
-</ul>
-
-<hr>
-
-<h2 id="progress">Progress</h2>
-
-<h4 id="coco-dataset-support">COCO Dataset Support</h4>
-
-<ul>
-  <li>I started by creating <code class="language-plaintext highlighter-rouge">coco.py</code>, which includes a <code class="language-plaintext highlighter-rouge">CocoDataset</code> class derived from <code class="language-plaintext highlighter-rouge">ImageDetectionDataset</code>.</li>
-  <li>I was spending some time to check if I should use pycocotools or write our own parsing logic.  Some GitHub <a href="https://github.com/cocodataset/cocoapi/issues/169" rel="external nofollow noopener" target="_blank">issues</a> pointed out that the official <code class="language-plaintext highlighter-rouge">pycocotools</code> is not Windows-friendly.</li>
-  <li>We found a <a href="https://github.com/cocodataset/cocoapi/issues/415#issuecomment-627313816" rel="external nofollow noopener" target="_blank">workaround</a> using <code class="language-plaintext highlighter-rouge">pycocotools-windows</code> for Windows machines. After discussing with mentors, we decided to handle installation conditionally. David also confirmed by installing the library in his windows machine. I have handled the installation in pyproject.toml like shown in the code below using this snippet:</li>
-</ul>
-
-<pre> pycocotools = { version = "^2.0.7", markers = "sys_platform != 'win32'" }
-pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'" }</pre>
-
-<ul>
-  <li>Within the <code class="language-plaintext highlighter-rouge">CocoDataset</code> class:
-    <ul>
-      <li>_build_ontology() maps COCO category IDs to the framework’s format.</li>
-      <li>_build_dataframe() prepares the structure used by the base class.</li>
-      <li>read_annotation() processes annotations for each image based on image_id.</li>
+      <li class="page-item disabled">
+        <a class="page-link" href="">&gt;</a>
+      </li>
     </ul>
-  </li>
-</ul>
-
-<h4 id="torch-model-refactor">Torch Model Refactor</h4>
-
-<ul>
-  <li>I renamed <code class="language-plaintext highlighter-rouge">torch.py</code> to <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> and updated the imports across all example scripts accordingly.</li>
-  <li>Then I created <code class="language-plaintext highlighter-rouge">torch_detection.py</code> to support detection models.</li>
-  <li>Taking <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> as a reference, I modified:
-    <ul>
-      <li>data_to_device()</li>
-      <li>get_data_shape()</li>
-      <li>get_computational_cost()</li>
-    </ul>
-
-    <p>to account for the different input format used in detection: <code class="language-plaintext highlighter-rouge">List[Dict[str, Tensor]]</code>.</p>
-  </li>
-  <li>I wasn’t sure if unsqueeze_data() and the CustomResize class were necessary for detection, so I skipped them for now.</li>
-  <li>I was unwell on Tuesday and Wednesday and couldn’t make as much progress as I had planned. I couldn’t fully finish torch_detection.py this week. However, I’ve committed the partial changes in the <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312" rel="external nofollow noopener" target="_blank">draft PR #312</a>.</li>
-</ul>
-
-<hr>
-
-<h2 id="going-ahead">Going ahead</h2>
-
-<p>Next week, I’ll aim to:</p>
-<ul>
-  <li>Complete the Torch detection model integration</li>
-  <li>Add the metrics evaluation part for detection</li>
-  <li>Add an end-to-end example with COCO + Torch detection</li>
-</ul>
-
-
-    </div>
-  </article>
-
-  
-
-  
-
-  
-    
-      
-
-  
-    
-    <br>
-    <hr>
-    <br>
-    <ul class="list-disc pl-8"></ul>
-
-    <!-- Adds related posts to the end of an article -->
-    <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2>
-    <p class="mb-2">Here are some more articles you might like to read next:</p>
-  
-
-  <li class="my-2">
-    
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/">Week 4 (Jun 23 - Jun 29)</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/">Week 3 (Jun 16 - Jun 22)</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/">Week 1 (Jun 01 - Jun 08)</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/">Community Bonding Week-2</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/">Community Bonding Week-1</a>
-    
-  </li>
+  </nav>
 
 
 
-    
-  
 
-  
-  
 </div>
 
       

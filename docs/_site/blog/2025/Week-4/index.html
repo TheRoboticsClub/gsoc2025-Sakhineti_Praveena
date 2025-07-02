@@ -17,7 +17,7 @@
   
   
     
-      Week 2 (Jun 09 - Jun 15) | Sakhineti Praveena | JdeRobot x GSoC2025
+      Week 4 (Jun 23 - Jun 29) | Sakhineti Praveena | JdeRobot x GSoC2025
     
   
 </title>
@@ -60,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -206,9 +206,9 @@
 
 <div class="post">
   <header class="post-header">
-    <h1 class="post-title">Week 2 (Jun 09 - Jun 15)</h1>
+    <h1 class="post-title">Week 4 (Jun 23 - Jun 29)</h1>
     <p class="post-meta">
-      Created on June 16, 2025
+      Created on June 30, 2025
       by Sakhineti Praveena
       
       
@@ -236,75 +236,62 @@
     <div id="markdown-content">
       <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
-<p>We discussed about the progress made in the previous week where I have refactored dataset and model classes. I also raised an issue I encountered during testing: in one of the examples, the inference output appeared distorted compared to earlier results. David mentioned he would look into it on his end(which was fixed later that week through <a href="https://github.com/JdeRobot/DetectionMetrics/pull/314" rel="external nofollow noopener" target="_blank">Issue #314</a>).</p>
-
-<p>Another topic was the current file structure. Right now, both the <code class="language-plaintext highlighter-rouge">dataset</code> and <code class="language-plaintext highlighter-rouge">model</code> directories have a lot of files, and David suggested we may consider restructuring them later as the project evolves. Overall, the feedback from mentors was positive, and we moved ahead with planning goals for the coming week.</p>
+<ul>
+  <li>This week’s meeting began with an update on my progress. I shared details about the <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> class I created. David suggested that a common base class could be used, from which both <code class="language-plaintext highlighter-rouge">SegmentationMetricsFactory</code> and <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> can be derived.</li>
+  <li>We discussed whether to use Streamlit or Gradio for the UI. The consensus was that the choice depends on our end goal. Sergio clarified that the goal is to build a full application (not just a demo), so we decided to proceed with Streamlit. This will allow us to support future UI advancements more easily.</li>
+  <li>I asked the mentors about their idea for the UI design. They shared details and references from the UI used in v1, which I will use as inspiration.</li>
+  <li>Finally, I discussed an error I encountered while implementing the example notebook. The issue was due to an improperly defined ontology translation. David provided helpful suggestions on how to define the ontology correctly.</li>
+</ul>
 
 <hr>
 
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
 <ul class="task-list">
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Add support for COCO dataset</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Test and fix all issues in the code developed so far.</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled>Add support for Torch detection models (Partially done)</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled>(Partially done for small dataset) Have a working example for DetectionMetrics using COCO and a Torch model.</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled>Explore Streamlit if time permits</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Design the basic UI and get feedback from mentors.</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Get familiar with Streamlit to kickstart UI development.</li>
 </ul>
 
 <hr>
 
 <h2 id="progress">Progress</h2>
 
-<h4 id="coco-dataset-support">COCO Dataset Support</h4>
-
 <ul>
-  <li>I started by creating <code class="language-plaintext highlighter-rouge">coco.py</code>, which includes a <code class="language-plaintext highlighter-rouge">CocoDataset</code> class derived from <code class="language-plaintext highlighter-rouge">ImageDetectionDataset</code>.</li>
-  <li>I was spending some time to check if I should use pycocotools or write our own parsing logic.  Some GitHub <a href="https://github.com/cocodataset/cocoapi/issues/169" rel="external nofollow noopener" target="_blank">issues</a> pointed out that the official <code class="language-plaintext highlighter-rouge">pycocotools</code> is not Windows-friendly.</li>
-  <li>We found a <a href="https://github.com/cocodataset/cocoapi/issues/415#issuecomment-627313816" rel="external nofollow noopener" target="_blank">workaround</a> using <code class="language-plaintext highlighter-rouge">pycocotools-windows</code> for Windows machines. After discussing with mentors, we decided to handle installation conditionally. David also confirmed by installing the library in his windows machine. I have handled the installation in pyproject.toml like shown in the code below using this snippet:</li>
-</ul>
+  <li>I started by working on the example notebook for detection metrics. The <code class="language-plaintext highlighter-rouge">KeyError</code> I faced last week was due to ontology translation issues and because the model’s integer output wasn’t converted to a string before being used as a key. This is now resolved.</li>
+  <li>I restructured <code class="language-plaintext highlighter-rouge">coco.py</code> and <code class="language-plaintext highlighter-rouge">torch_detection.py</code> further after comparing them to the segmentation pipeline, aiming for consistency between both pipelines.</li>
+  <li>
+    <p>The example notebook now runs fine. However, when loading larger datasets, I encountered the error:</p>
 
-<pre> pycocotools = { version = "^2.0.7", markers = "sys_platform != 'win32'" }
-pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'" }</pre>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>'[srcBuf length] &gt; 0 INTERNAL ASSERT FAILED at "/Users/runner/work/pytorch/pytorch/pytorch/aten/src/ATen/native/mps/OperationUtils.mm":341, please report a bug to PyTorch. Placeholder tensor is empty!'
+</code></pre></div>    </div>
 
-<ul>
-  <li>Within the <code class="language-plaintext highlighter-rouge">CocoDataset</code> class:
-    <ul>
-      <li>_build_ontology() maps COCO category IDs to the framework’s format.</li>
-      <li>_build_dataframe() prepares the structure used by the base class.</li>
-      <li>read_annotation() processes annotations for each image based on image_id.</li>
-    </ul>
+    <p>I tried to debug this by ensuring empty images aren’t loaded into the model, but the error persisted. I’m unsure if this is a model or MPS issue. Further investigation was blocked by kernel crashes. Resolving these MPS issues is still pending, but I was able to run the notebook and get results for a small dataset of 5 images.</p>
   </li>
+  <li>Next, I explored UI design. I started by building a Figma design for the UI: <a href="https://www.figma.com/design/UWvShVroVUUEfD3dEdwxEy/Detection-metrics?node-id=0-1&amp;t=xY40vfWrA6dDT2WE-1" rel="external nofollow noopener" target="_blank">DetectionMetrics Figma</a>
+</li>
+  <li>I thought having <strong>Viewer</strong>, <strong>Detector</strong>, and <strong>Evaluator</strong> tabs in the sidebar would be relevant (similar to previous versions). Each tab will support both segmentation and detection. In Viewer, users can upload datasets and view sample images with ground truth masks/bounding boxes. In Detector, users can get inference for segmentation/detection. In Evaluator, all metrics will be displayed in the UI.</li>
 </ul>
-
-<h4 id="torch-model-refactor">Torch Model Refactor</h4>
-
+<div style="text-align: center;">
+<img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-30-Week-4/figma.png" alt="Old Class Structure" style="width: 95%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
 <ul>
-  <li>I renamed <code class="language-plaintext highlighter-rouge">torch.py</code> to <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> and updated the imports across all example scripts accordingly.</li>
-  <li>Then I created <code class="language-plaintext highlighter-rouge">torch_detection.py</code> to support detection models.</li>
-  <li>Taking <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> as a reference, I modified:
-    <ul>
-      <li>data_to_device()</li>
-      <li>get_data_shape()</li>
-      <li>get_computational_cost()</li>
-    </ul>
-
-    <p>to account for the different input format used in detection: <code class="language-plaintext highlighter-rouge">List[Dict[str, Tensor]]</code>.</p>
-  </li>
-  <li>I wasn’t sure if unsqueeze_data() and the CustomResize class were necessary for detection, so I skipped them for now.</li>
-  <li>I was unwell on Tuesday and Wednesday and couldn’t make as much progress as I had planned. I couldn’t fully finish torch_detection.py this week. However, I’ve committed the partial changes in the <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312" rel="external nofollow noopener" target="_blank">draft PR #312</a>.</li>
+  <li>I then began learning how Streamlit works. I created a demo app: <a href="https://github.com/TheRoboticsClub/gsoc2025-Sakhineti_Praveena/tree/main/demos/streamlit_demo.py" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">streamlit_demo.py</code></a>. The app features three sections in the sidebar. In the dataset tab, users can upload a sample image and select the annotation. On clicking <strong>View Sample</strong>, the image with bounding boxes is displayed in the UI.</li>
 </ul>
+<div style="text-align: center;">
+<img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-30-Week-4/demo.png" alt="Old Class Structure" style="width: 95%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
 
 <hr>
 
-<h2 id="going-ahead">Going ahead</h2>
-
-<p>Next week, I’ll aim to:</p>
-<ul>
-  <li>Complete the Torch detection model integration</li>
-  <li>Add the metrics evaluation part for detection</li>
-  <li>Add an end-to-end example with COCO + Torch detection</li>
-</ul>
+<h3 id="whats-next">What’s Next?</h3>
+<p>My main goal for next week is to get the draft PR merged. I will thoroughly test and fix all bugs, and clean up the codebase before doing that. And I also plan to make significant progress on the UI and get the basic implementation done.</p>
 
 
     </div>
@@ -332,7 +319,7 @@ pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/">Week 4 (Jun 23 - Jun 29)</a>
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/">Week 3 (Jun 16 - Jun 22)</a>
     
   </li>
 
@@ -340,7 +327,7 @@ pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-3/">Week 3 (Jun 16 - Jun 22)</a>
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/">Week 2 (Jun 09 - Jun 15)</a>
     
   </li>
 
