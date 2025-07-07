@@ -1,5 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-02T16:38:41+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 4 (Jun 23 - Jun 29)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/" rel="alternate" type="text/html" title="Week 4 (Jun 23 - Jun 29)" /><published>2025-06-30T00:00:00+05:30</published><updated>2025-06-30T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-07T19:21:48+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 5 (Jul 4 - Jul 7)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/" rel="alternate" type="text/html" title="Week 5 (Jul 4 - Jul 7)" /><published>2025-07-07T00:00:00+05:30</published><updated>2025-07-07T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<ul>
+  <li>In this week’s meeting, Sergio and I primarily discussed the UI. I presented the Figma design to him (<a href="https://www.figma.com/design/UWvShVroVUUEfD3dEdwxEy/Detection-metrics?node-id=0-1&amp;p=f">here it is for your reference</a>). He suggested several additions:
+    <ul>
+      <li>In the <strong>Dataset Viewer</strong> tab, after selecting the dataset, display some images and let the user select an image from there.</li>
+      <li>In the <strong>Detector</strong> tab, add the original image and an overlap of the original and prediction. Also, add a selector for a sample image to run inference on.</li>
+      <li>In the <strong>Evaluator</strong> tab, I had missed the batch size option, which Sergio pointed out.</li>
+      <li>He also recommended implementing real-time updating of the metrics and emphasized keeping the end user in mind throughout the design.</li>
+    </ul>
+  </li>
+  <li>I also created a small prototype using Streamlit and demonstrated it to Sergio. He suggested using separate bounding box colors for different categories.</li>
+</ul>
+
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Continue making progress with the Streamlit UI.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Extensively test the newly added object detection metrics.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Fix all the MPS errors I was facing.</li>
+</ul>
+
+<h2 id="progress">Progress</h2>
+
+<ul>
+  <li>I started by fixing errors in my example notebook, focusing on the kernel crash issue from last week and the <code class="language-plaintext highlighter-rouge">[srcBuf length] &gt; 0 INTERNAL ASSERT FAILED</code> error specific to MPS.</li>
+  <li>I noticed that inference through my pipeline was producing poor predictions, so I rechecked the class definitions and added logic for the confidence threshold in both inference and evaluation.</li>
+  <li>I also modified my model configuration and updated PyTorch. Everything is working as expected now. Next, I plan to run evaluation on a larger dataset sample and check the results.</li>
+  <li>Another issue I observed: running evaluation was taking almost 50–60 seconds per sample. I’m not sure if this is normal, so I’ll check with my mentors to see if there’s a way to decrease the runtime.</li>
+  <li>I then worked on the UI, implementing Sergio’s suggestions for the Dataset Viewer tab. Currently, I’m accepting the dataset as a zip file (since Streamlit doesn’t support folder uploads), and displaying 10 sample images from the dataset. After the user selects an image, it is shown in full size with bounding boxes.</li>
+  <li>Streamlit doesn’t allow images to be used directly as buttons, so as a workaround for this demo, I’ve added a button below each image. In the future, I’ll explore creating a custom component to make the images themselves clickable.</li>
+</ul>
+
+<video width="640" height="360" controls="">
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/Dataset_Page.mov" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<hr />]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 4 (Jun 23 - Jul 3)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/" rel="alternate" type="text/html" title="Week 4 (Jun 23 - Jul 3)" /><published>2025-06-30T00:00:00+05:30</published><updated>2025-06-30T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-4/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
   <li>This week’s meeting began with an update on my progress. I shared details about the <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> class I created. David suggested that a common base class could be used, from which both <code class="language-plaintext highlighter-rouge">SegmentationMetricsFactory</code> and <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> can be derived.</li>
