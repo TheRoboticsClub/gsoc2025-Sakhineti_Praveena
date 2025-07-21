@@ -16,7 +16,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/";
           },
-        },{id: "post-week-6-jul-7-jul-14",
+        },{id: "post-week-7-jul-15-jul-21",
+        
+          title: "Week 7 (Jul 15 - Jul 21)",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/";
+          
+        },
+      },{id: "post-week-6-jul-7-jul-14",
         
           title: "Week 6 (Jul 7 - Jul 14)",
         
