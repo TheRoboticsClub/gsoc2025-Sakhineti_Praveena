@@ -1,5 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-14T19:16:58+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 6 (Jul 7 - Jul 14)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/" rel="alternate" type="text/html" title="Week 6 (Jul 7 - Jul 14)" /><published>2025-07-14T00:00:00+05:30</published><updated>2025-07-14T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-21T21:14:02+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 7 (Jul 15 - Jul 21)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/" rel="alternate" type="text/html" title="Week 7 (Jul 15 - Jul 21)" /><published>2025-07-21T00:00:00+05:30</published><updated>2025-07-21T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<ul>
+  <li>I showed them the dataset tab I have worked on. David suggested that I include the option for the user to also select a specific dataset sample with a drop-down list. Apart from that, no other concerns were raised regarding the dataset tab.</li>
+  <li>I went on to ask their ideas for the inference tab. David let me know that the user should also be allowed to input the model config parameters along with the JSON file. They clarified that showing the ground truth is not necessary in this tab, since the user should be able to upload any picture from the internet and see the inference for that image. The comparison with ground truth can be done in the metrics tab.</li>
+  <li>We also discussed the changes requested on the PR; the main one being that ontology conversion is not necessary.</li>
+</ul>
+
+<hr />
+
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Finish the changes requested on the PR and get the object detection code merged</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Finish on the inference tab</li>
+</ul>
+
+<hr />
+
+<h2 id="progress">Progress</h2>
+
+<ul>
+  <li>I started this week by making the changes David requested in the pull request. I began by pulling his changes regarding not using ontology translations in the sample notebook and modified the code from there.</li>
+  <li>I have modified the code so that both datasets and model ontologies follow the format { “class_name_a”: {idx: 0, rgb: [0, 0, 0]}, “class_name_b”: {idx: 1, rgb: [0, 0, 0]} }, etc. I also added a split parameter for the dataset class and initialized the dataset object with it in the sample notebook. Regarding the iou_threshold, I previously defaulted it to 0.5 by mistake. After David pointed that out, I am now reading the value from the model config, and if it is not defined, I default to 0.5. In the future, we plan to accept a range of values as well. I have also formatted all the files using black 24.10.0.</li>
+  <li>Next, I refined the dataset viewer tab. I added a search icon to let the user select a particular sample from the dataset and made some UI refinements.</li>
+  <li>Then I started working on the UI for the inference tab. I have included file upload input boxes for the model file, ontology, and image. For the model configuration, the user can either select a model file or manually provide values for each parameter. After providing all the details, when the user selects ‘run inference’, the inference image with color-coded bounding boxes appears in the UI.</li>
+  <li>Currently, one issue I have noted is the time taken to run inference, and even in the dataset viewer tab, the time taken to load the selected picture is high. I will try to reduce the loading time.</li>
+</ul>
+
+<video width="640" height="360" controls="">
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/week7GUI.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<hr />
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>After receiving feedback from the mentors on the UI, I will make the necessary changes.</li>
+  <li>I will also work on the metrics tab.</li>
+</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 6 (Jul 7 - Jul 14)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/" rel="alternate" type="text/html" title="Week 6 (Jul 7 - Jul 14)" /><published>2025-07-14T00:00:00+05:30</published><updated>2025-07-14T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <p>We started by discussing the progress so far, and I demonstrated the UI prototype with Dataset Viewer tab that I developed.</p>
 

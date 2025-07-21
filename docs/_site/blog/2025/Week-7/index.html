@@ -17,7 +17,7 @@
   
   
     
-      Week 5 (Jul 4 - Jul 7) | Sakhineti Praveena | JdeRobot x GSoC2025
+      Week 7 (Jul 15 - Jul 21) | Sakhineti Praveena | JdeRobot x GSoC2025
     
   
 </title>
@@ -60,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -206,9 +206,9 @@
 
 <div class="post">
   <header class="post-header">
-    <h1 class="post-title">Week 5 (Jul 4 - Jul 7)</h1>
+    <h1 class="post-title">Week 7 (Jul 15 - Jul 21)</h1>
     <p class="post-meta">
-      Created on July 07, 2025
+      Created on July 21, 2025
       by Sakhineti Praveena
       
       
@@ -237,45 +237,47 @@
       <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
-  <li>In this week’s meeting, Sergio and I primarily discussed the UI. I presented the Figma design to him (<a href="https://www.figma.com/design/UWvShVroVUUEfD3dEdwxEy/Detection-metrics?node-id=0-1&amp;p=f" rel="external nofollow noopener" target="_blank">here it is for your reference</a>). He suggested several additions:
-    <ul>
-      <li>In the <strong>Dataset Viewer</strong> tab, after selecting the dataset, display some images and let the user select an image from there.</li>
-      <li>In the <strong>Detector</strong> tab, add the original image and an overlap of the original and prediction. Also, add a selector for a sample image to run inference on.</li>
-      <li>In the <strong>Evaluator</strong> tab, I had missed the batch size option, which Sergio pointed out.</li>
-      <li>He also recommended implementing real-time updating of the metrics and emphasized keeping the end user in mind throughout the design.</li>
-    </ul>
-  </li>
-  <li>I also created a small prototype using Streamlit and demonstrated it to Sergio. He suggested using separate bounding box colors for different categories.</li>
+  <li>I showed them the dataset tab I have worked on. David suggested that I include the option for the user to also select a specific dataset sample with a drop-down list. Apart from that, no other concerns were raised regarding the dataset tab.</li>
+  <li>I went on to ask their ideas for the inference tab. David let me know that the user should also be allowed to input the model config parameters along with the JSON file. They clarified that showing the ground truth is not necessary in this tab, since the user should be able to upload any picture from the internet and see the inference for that image. The comparison with ground truth can be done in the metrics tab.</li>
+  <li>We also discussed the changes requested on the PR; the main one being that ontology conversion is not necessary.</li>
 </ul>
+
+<hr>
 
 <h2 id="to-do-for-this-week">To Do for This Week</h2>
 
 <ul class="task-list">
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Continue making progress with the Streamlit UI.</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Finish the changes requested on the PR and get the object detection code merged</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Extensively test the newly added object detection metrics.</li>
-  <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Fix all the MPS errors I was facing.</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Finish on the inference tab</li>
 </ul>
+
+<hr>
 
 <h2 id="progress">Progress</h2>
 
 <ul>
-  <li>I started by fixing errors in my example notebook, focusing on the kernel crash issue from last week and the <code class="language-plaintext highlighter-rouge">[srcBuf length] &gt; 0 INTERNAL ASSERT FAILED</code> error specific to MPS.</li>
-  <li>I noticed that inference through my pipeline was producing poor predictions, so I rechecked the class definitions and added logic for the confidence threshold in both inference and evaluation.</li>
-  <li>I also modified my model configuration and updated PyTorch. Everything is working as expected now. Next, I plan to run evaluation on a larger dataset sample and check the results.</li>
-  <li>Another issue I observed: running evaluation was taking almost 50–60 seconds per sample. I’m not sure if this is normal, so I’ll check with my mentors to see if there’s a way to decrease the runtime.</li>
-  <li>I then worked on the UI, implementing Sergio’s suggestions for the Dataset Viewer tab. Currently, I’m accepting the dataset as a zip file (since Streamlit doesn’t support folder uploads), and displaying 10 sample images from the dataset. After the user selects an image, it is shown in full size with bounding boxes.</li>
-  <li>Streamlit doesn’t allow images to be used directly as buttons, so as a workaround for this demo, I’ve added a button below each image. In the future, I’ll explore creating a custom component to make the images themselves clickable.</li>
+  <li>I started this week by making the changes David requested in the pull request. I began by pulling his changes regarding not using ontology translations in the sample notebook and modified the code from there.</li>
+  <li>I have modified the code so that both datasets and model ontologies follow the format { “class_name_a”: {idx: 0, rgb: [0, 0, 0]}, “class_name_b”: {idx: 1, rgb: [0, 0, 0]} }, etc. I also added a split parameter for the dataset class and initialized the dataset object with it in the sample notebook. Regarding the iou_threshold, I previously defaulted it to 0.5 by mistake. After David pointed that out, I am now reading the value from the model config, and if it is not defined, I default to 0.5. In the future, we plan to accept a range of values as well. I have also formatted all the files using black 24.10.0.</li>
+  <li>Next, I refined the dataset viewer tab. I added a search icon to let the user select a particular sample from the dataset and made some UI refinements.</li>
+  <li>Then I started working on the UI for the inference tab. I have included file upload input boxes for the model file, ontology, and image. For the model configuration, the user can either select a model file or manually provide values for each parameter. After providing all the details, when the user selects ‘run inference’, the inference image with color-coded bounding boxes appears in the UI.</li>
+  <li>Currently, one issue I have noted is the time taken to run inference, and even in the dataset viewer tab, the time taken to load the selected picture is high. I will try to reduce the loading time.</li>
 </ul>
 
 <video width="640" height="360" controls="">
-  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/Dataset_Page.mov" type="video/mp4"></source>
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/week7GUI.mp4" type="video/mp4"></source>
   Your browser does not support the video tag.
 </video>
 
 <hr>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>After receiving feedback from the mentors on the UI, I will make the necessary changes.</li>
+  <li>I will also work on the metrics tab.</li>
+</ul>
 
     </div>
   </article>
@@ -302,7 +304,7 @@
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/">Week 7 (Jul 15 - Jul 21)</a>
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/">Week 6 (Jul 7 - Jul 14)</a>
     
   </li>
 
@@ -310,7 +312,7 @@
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/">Week 6 (Jul 7 - Jul 14)</a>
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/">Week 5 (Jul 4 - Jul 7)</a>
     
   </li>
 
