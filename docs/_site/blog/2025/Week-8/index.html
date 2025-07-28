@@ -17,7 +17,7 @@
   
   
     
-      Week 5 (Jul 4 - Jul 7) | Sakhineti Praveena | JdeRobot x GSoC2025
+      Week 8 (Jul 22 - Jul 28) | Sakhineti Praveena | JdeRobot x GSoC2025
     
   
 </title>
@@ -60,7 +60,7 @@
   <link rel="shortcut icon" href="/gsoc2025-Sakhineti_Praveena/assets/img/logo.png?a3cac8c2613225704682d343b37ffd84">
 
 <link rel="stylesheet" href="/gsoc2025-Sakhineti_Praveena/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
-<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/">
+<link rel="canonical" href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/">
 
 <!-- Dark Mode -->
 <script src="/gsoc2025-Sakhineti_Praveena/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script>
@@ -206,9 +206,9 @@
 
 <div class="post">
   <header class="post-header">
-    <h1 class="post-title">Week 5 (Jul 4 - Jul 7)</h1>
+    <h1 class="post-title">Week 8 (Jul 22 - Jul 28)</h1>
     <p class="post-meta">
-      Created on July 07, 2025
+      Created on July 28, 2025
       by Sakhineti Praveena
       
       
@@ -237,45 +237,74 @@
       <h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
-  <li>In this week’s meeting, Sergio and I primarily discussed the UI. I presented the Figma design to him (<a href="https://www.figma.com/design/UWvShVroVUUEfD3dEdwxEy/Detection-metrics?node-id=0-1&amp;p=f" rel="external nofollow noopener" target="_blank">here it is for your reference</a>). He suggested several additions:
-    <ul>
-      <li>In the <strong>Dataset Viewer</strong> tab, after selecting the dataset, display some images and let the user select an image from there.</li>
-      <li>In the <strong>Detector</strong> tab, add the original image and an overlap of the original and prediction. Also, add a selector for a sample image to run inference on.</li>
-      <li>In the <strong>Evaluator</strong> tab, I had missed the batch size option, which Sergio pointed out.</li>
-      <li>He also recommended implementing real-time updating of the metrics and emphasized keeping the end user in mind throughout the design.</li>
-    </ul>
-  </li>
-  <li>I also created a small prototype using Streamlit and demonstrated it to Sergio. He suggested using separate bounding box colors for different categories.</li>
+  <li>I showed the mentors the UI for the inference tab I developed. The major feedback they had was regarding the loading time and the consistency of the output. Sergio let me know that the model inference should take not more than a few seconds.</li>
+  <li>Santiago suggested that I note down the time it is taking and also check the device used and if the model is loaded multiple times. David suggested that I give the user information about what is happening in the background actively in the UI. They also suggested that the user should be able to give image size as a parameter in the model config.</li>
+  <li>David also talked about the things he planned to do once the UI is done, like extending the metrics and extending for YOLO datasets. But before moving on to that, the main thing that is expected is to have a fully functional UI prototype.</li>
+  <li>We just finished the mid-term evaluation this week. They let me know about the things that I can improve on, and the main thing is being able to notice the outputs and evaluate them. Basically, an intuition that I need to slowly develop to be able to look at the output and identify if something is wrong.</li>
 </ul>
+
+<hr>
 
 <h2 id="to-do-for-this-week">To Do for This Week</h2>
 
 <ul class="task-list">
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Continue making progress with the Streamlit UI.</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Fix the issue with loading time</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Extensively test the newly added object detection metrics.</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled checked>Refining the UI</li>
   <li class="task-list-item">
-<input type="checkbox" class="task-list-item-checkbox" disabled checked>Fix all the MPS errors I was facing.</li>
+<input type="checkbox" class="task-list-item-checkbox" disabled>Working on metrics tab (if time permits)</li>
 </ul>
+
+<hr>
 
 <h2 id="progress">Progress</h2>
 
 <ul>
-  <li>I started by fixing errors in my example notebook, focusing on the kernel crash issue from last week and the <code class="language-plaintext highlighter-rouge">[srcBuf length] &gt; 0 INTERNAL ASSERT FAILED</code> error specific to MPS.</li>
-  <li>I noticed that inference through my pipeline was producing poor predictions, so I rechecked the class definitions and added logic for the confidence threshold in both inference and evaluation.</li>
-  <li>I also modified my model configuration and updated PyTorch. Everything is working as expected now. Next, I plan to run evaluation on a larger dataset sample and check the results.</li>
-  <li>Another issue I observed: running evaluation was taking almost 50–60 seconds per sample. I’m not sure if this is normal, so I’ll check with my mentors to see if there’s a way to decrease the runtime.</li>
-  <li>I then worked on the UI, implementing Sergio’s suggestions for the Dataset Viewer tab. Currently, I’m accepting the dataset as a zip file (since Streamlit doesn’t support folder uploads), and displaying 10 sample images from the dataset. After the user selects an image, it is shown in full size with bounding boxes.</li>
-  <li>Streamlit doesn’t allow images to be used directly as buttons, so as a workaround for this demo, I’ve added a button below each image. In the future, I’ll explore creating a custom component to make the images themselves clickable.</li>
+  <li>I started with reducing the loading time in the dataset viewer tab. Initially, I noted down all the loading times:
+    <ul>
+      <li>App load: 7 secs</li>
+      <li>12 images load: 11 secs</li>
+      <li>Ground truth load: 10 secs</li>
+      <li>On clicking search button: 8 secs</li>
+      <li>Upon clicking an item in the list + go to image: 28 secs</li>
+    </ul>
+  </li>
+  <li>App load would take 7 secs to import the libraries and modules required for the application. But the rest of the loading times were too high. At first, I tried caching the annotations for all the images in the dataset. That reduced all the image and ground truth loading times, but the initial dataset loading was taking around 42 secs to cache all the annotations. Later, I realized that fetching the annotations per image isn’t the problem, but the complete annotations being loaded every time was the main problem. Storing the dataset_name in the session state of Streamlit made sure that the same dataset object was not loaded repeatedly, which drastically reduced the loading times on the page. Now the optimized loading times are as follows:
+    <ul>
+      <li>Page load: 7 secs</li>
+      <li>Loading dataset initially and storing in session state: 11 secs</li>
+      <li>Ground truth load: 2-3 secs</li>
+      <li>On clicking search button: 2 secs</li>
+      <li>Upon clicking go to image: 4 secs</li>
+    </ul>
+  </li>
+  <li>
+    <p>Then I moved on to the inference tab. I added debug statements with time information to check which part of my code was slowing the inference down. Looking at those debug points, I understood that the inference() function defined in my TorchImageDetectionModel class was the main culprit. It was taking the same time even in my sample notebook. I tried a bunch of fixes, but none of them worked for me. I reached out to my mentors, and after taking their suggestions, I tried using just the CPU. Turns out the main issue was caused by my Mac MPS. The code architecture or the UI didn’t have any issues that had to be fixed. David also tried it on his machine and didn’t notice any issue either. The inference is loaded in 2-3 secs the first time and less than a second from the second time onwards.</p>
+  </li>
+  <li>I then moved on to enhancing the inference page UI. The earlier UI was clumsy. Now I added the option to save the model first, and then it can be reused to run inference on multiple pictures.</li>
 </ul>
 
 <video width="640" height="360" controls="">
-  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/Dataset_Page.mov" type="video/mp4"></source>
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/week8.mp4" type="video/mp4"></source>
   Your browser does not support the video tag.
 </video>
 
 <hr>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>Work on metrics tab and finish the UI prototype</li>
+  <li>Minor fixes/enhancements:
+    <ul>
+      <li>Add image size to the model config</li>
+      <li>Check why MPS was very slow</li>
+      <li>Fix issue in dataset tab where after clicking “go to image”, the orange highlight isn’t on the right picture</li>
+    </ul>
+  </li>
+  <li>Test the UI and fix any issues found</li>
+</ul>
 
     </div>
   </article>
@@ -302,14 +331,6 @@
 
   <li class="my-2">
     
-      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/">Week 8 (Jul 22 - Jul 28)</a>
-    
-  </li>
-
-  
-
-  <li class="my-2">
-    
       <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-7/">Week 7 (Jul 15 - Jul 21)</a>
     
   </li>
@@ -319,6 +340,14 @@
   <li class="my-2">
     
       <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-6/">Week 6 (Jul 7 - Jul 14)</a>
+    
+  </li>
+
+  
+
+  <li class="my-2">
+    
+      <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/gsoc2025-Sakhineti_Praveena/blog/2025/Week-5/">Week 5 (Jul 4 - Jul 7)</a>
     
   </li>
 
