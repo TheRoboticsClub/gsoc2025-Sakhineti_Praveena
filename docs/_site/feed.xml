@@ -1,5 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-28T17:57:52+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 8 (Jul 22 - Jul 28)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/" rel="alternate" type="text/html" title="Week 8 (Jul 22 - Jul 28)" /><published>2025-07-28T00:00:00+05:30</published><updated>2025-07-28T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-04T17:09:07+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 9 (Jul 29 - Aug 4)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/" rel="alternate" type="text/html" title="Week 9 (Jul 29 - Aug 4)" /><published>2025-08-04T00:00:00+05:30</published><updated>2025-08-04T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<ul>
+  <li>I started with showing them the UI enhancements that I made and updating the progress that I have made regarding reducing the loading time in the UI.</li>
+  <li>David suggested that I change the name for the save model button to “load model” and he also suggested that I add a summary section towards the end of the page after inference with all the detection details and also add an option to download it as a JSON file.</li>
+  <li>We also discussed the vision they have regarding the metrics tab. David mentioned that showing the progress bar is a must and visualizing the ground truth and inference of a sample from the dataset. He mentioned that extending the metrics supported like adding precision-recall curve and range of IoU-thresholds is also a priority for this week and the same should be shown in the metrics tab UI as well.</li>
+  <li>Later Sergio shared https://leaderboard.roboflow.com/ with us, which basically gives me an idea of metrics that we should show and also how to show them in the UI.</li>
+</ul>
+
+<hr />
+
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Develop metrics tab</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Extend metrics to support precision-recall curve and range of IoU thresholds</li>
+</ul>
+
+<hr />
+
+<h2 id="progress">Progress</h2>
+
+<ul>
+  <li>
+    <p>I started with working on the pilot version of metrics tab UI first. I basically had this idea that it is redundant for the user to give the dataset and model details again in this tab if they had already given them in the dataset and inference tabs. The UI also would be cleaner if fewer number of input boxes are there. So I thought it would be better to reuse the dataset and model objects that are created during the earlier tabs. If the user had not given them yet, this tab would show a banner that the dataset details are to be provided in the dataset viewer tab. After the dataset and model details are given, then the user would be able to access the “run evaluation” button. Upon clicking the button, the dataset processing would start and the progress bar with the number of samples processed so far would also be displayed. Once the evaluation is done, the evaluation summary would be shown along with the option to download the CSV of the result dataframe.</p>
+  </li>
+  <li>
+    <p>To support the progress bar in Streamlit, I had to alter the eval function in the TorchImageDetectionModel class. So basically when initiated from the UI, we pass an extra parameter now called progress_callback (Optional callback function for progress updates in Streamlit UI). When initiating from the Jupyter notebook, this parameter can be skipped, and when it is skipped, the usual tqdm progress bar will be shown.</p>
+  </li>
+  <li>
+    <p>I have also added the section in inference where the user can see the detection results, and also added a button to download the results as a JSON file.</p>
+  </li>
+  <li>
+    <p>I was a little ambiguous about how to take the input for the range of IoU_thresholds. I asked the mentors to confirm. While I heard back from them, I thought of exploring to make the evaluator tab better. I thought the ideal case could be that the details the user gives in dataset and inference tabs should be able to be preloaded when we open the evaluator tabs. And if the user wants to, they should also be able to change the details. I tried implementing the same, but I was facing issues with the files uploaded during the inference tab which should be carried to the evaluator tab. I will keep working on it to find out a way to make it work.</p>
+  </li>
+</ul>
+<video width="640" height="360" controls="">
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/Metrics_pilot.mov" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+<hr />
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>Extending the evaluation metrics, display plotting curves and GT, inference for a sample in metrics tab.</li>
+  <li>Finish the UI prototype, test and fix any last-minute errors.</li>
+</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 8 (Jul 22 - Jul 28)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/" rel="alternate" type="text/html" title="Week 8 (Jul 22 - Jul 28)" /><published>2025-07-28T00:00:00+05:30</published><updated>2025-07-28T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-8/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
   <li>I showed the mentors the UI for the inference tab I developed. The major feedback they had was regarding the loading time and the consistency of the output. Sergio let me know that the model inference should take not more than a few seconds.</li>
@@ -509,43 +556,4 @@ pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'
   
 </figure>
 
-<p>We then had a round of introductions, which was a great way to connect with like-minded people working on exciting and diverse projects. Following that, Pedro shared some helpful insights into the work methodologies we’ll be following, including contribution guidelines and evaluation timelines. David also gave us an important reminder to be proactive, not just during our weekly check-ins but throughout the week — by sharing timely updates, asking questions, and staying engaged. I will make sure to keep that in mind. He reassured us that no question is too small or silly. Overall it was a really helpful session to kick things off!</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Community Bonding Week-1</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/" rel="alternate" type="text/html" title="Community Bonding Week-1" /><published>2025-05-23T00:00:00+05:30</published><updated>2025-05-23T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-1/"><![CDATA[<p>I am excited to be part of GSoC 2025! This week marks the official start of the program with <strong>community bonding period</strong>, and I couldn’t be more thrilled to dive in.</p>
-
-<p>My project, <strong>“Extend DetectionMetrics: GUI, CI Workflow, and Object Detection”</strong>,  will introduce me to perception model evaluation and give me hands on experience in the field of computer vision. <a href="https://github.com/JdeRobot/DetectionMetrics">DetectionMetrics</a> is a toolkit used for evaluating perception models across various frameworks and datasets. Ironically the latest version of Detectionmetrics currently supports image segmentation model evaluations, during my coding period my objective is to extend its functionality to object detection evaluation, build an interactive user interface and set up the CI workflow. This project is a perfect opportunity for me to gain hands-on experience in <strong>computer vision</strong>, and I’m eager to soak in all the learning that comes with it!</p>
-
-<hr />
-
-<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>This week, I had my first meeting with my mentors. We spent time getting to know each other and discussing the initial steps of the project. We also reviewed the program’s logistics and clarified expectations moving forward. Communication was emphasized, with Slack chosen as the primary tool for day-to-day discussions and updates.</p>
-
-<p>The discussion also covered the initial steps for the project, such as diving deep and learning about different perception models, standard frameworks and datasets. I was also asked to set up this blog to document my journey through the project and for it to be easy for my mentors to keep a track of my progress.</p>
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Set up a blog website using Jekyll and GitHub Pages</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Read and analyze literature on perception models and datasets</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Write this first blog post documenting progress</li>
-</ul>
-
-<hr />
-
-<h2 id="progress-so-far">Progress So Far</h2>
-
-<p>I started the week by solidifying my foundation, I revisited my <strong>undergraduate computer vision coursework</strong>, focusing on:</p>
-
-<ul>
-  <li>Key concepts: <strong>Object Detection</strong>, <strong>Instance Segmentation</strong>, and <strong>Semantic Segmentation</strong></li>
-  <li>Core frameworks: <strong>PyTorch</strong> and <strong>TensorFlow</strong></li>
-  <li>Standard datasets: <strong>COCO</strong>, <strong>Pascal VOC</strong></li>
-  <li>Evaluation metrics: <strong>mAP</strong>, <strong>IoU</strong></li>
-</ul>
-
-<p>This foundational review has been super helpful in framing the work ahead and getting me ready for the development phase.</p>
-
-<p>Then I moved on to setting up this blog — drawing inspiration from past GSoC contributor blogs, I used <strong>Jekyll</strong> , a static site generator, along with <strong>GitHub Pages</strong> for hosting the website. I plan on uploading a blog every week with the progress, updates and learnings.</p>
-
-<hr />
-
-<p>I’m looking forward to continuing this journey, learning from my mentors, and contributing meaningfully to the open-source community.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[I am excited to be part of GSoC 2025! This week marks the official start of the program with community bonding period, and I couldn’t be more thrilled to dive in.]]></summary></entry></feed>
+<p>We then had a round of introductions, which was a great way to connect with like-minded people working on exciting and diverse projects. Following that, Pedro shared some helpful insights into the work methodologies we’ll be following, including contribution guidelines and evaluation timelines. David also gave us an important reminder to be proactive, not just during our weekly check-ins but throughout the week — by sharing timely updates, asking questions, and staying engaged. I will make sure to keep that in mind. He reassured us that no question is too small or silly. Overall it was a really helpful session to kick things off!</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
