@@ -1,5 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-04T17:09:07+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 9 (Jul 29 - Aug 4)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/" rel="alternate" type="text/html" title="Week 9 (Jul 29 - Aug 4)" /><published>2025-08-04T00:00:00+05:30</published><updated>2025-08-04T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-12T18:53:45+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 10 (Aug 4 - Aug 11)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/" rel="alternate" type="text/html" title="Week 10 (Aug 4 - Aug 11)" /><published>2025-08-11T00:00:00+05:30</published><updated>2025-08-11T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<ul>
+  <li>I met with Sergio this week. I started with showing him what I have about the evaluator tab. Towards the end of last week, I actually explored having the dataset and model saved from the other two tabs and being able to run the evaluation on those. I showed him the approach I tried where we get the data from the other two tabs but also let the user edit them.</li>
+</ul>
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-08-11-Week-10/Evaluator.png" alt="Evaluator Tab Screenshot" style="width: 60%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
+<ul>
+  <li>Sergio let me know that it is better to have the same pipeline, as in not have two places where we let the user give the data. But we also discussed that for the user to just run the evaluation, it makes more sense to also let the user edit the details in the evaluator tab. So for now, we have decided to let it be there this way where we do load the data given in the other two tabs but also let the user edit in this tab.</li>
+  <li>Later we discussed regarding my doubt in extending the metrics for a range of IoU thresholds. Sergio clarified that supporting the standard 0.5:0.95 with a step size of 0.05 is enough from a user perspective. I let him know that I also plan on adding area under the curve (AUC).</li>
+  <li>He also suggested to think about the information that we could provide to the user while we run the evaluation. For that, he also suggested that I should add the ‘Evaluation step’ parameter. The user should be able to give the value for steps after which we keep updating the UI with the metrics. As in for a dataset sample of 5000, if the user gives a step size of 100, we should be calculating the metrics for every 100 images and keep updating in the UI.</li>
+  <li>We have also discussed about comparing two results which could be implemented later on in the project.</li>
+  <li>He let me know that for now the basic requirement of the project is almost there, from now on it would be extending the tool.</li>
+</ul>
+
+<hr />
+
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Extending the metrics, adding plots and images in the evaluator tab</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Adding evaluation step parameter</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Refining the UI</li>
+</ul>
+
+<hr />
+
+<h2 id="progress">Progress</h2>
+
+<ul>
+  <li>This week I started with extending the metrics, like discussed in the call last week. I have added the mAP@0.5:0.95 with the step size of 0.05.</li>
+  <li>I have also added the precision-recall points that can be used to plot in the UI to be included in Detection Metrics Factory class. In the results dataframe, I have added the mAP@0.5:0.95 and the Area under the precision-recall curve (AUC-PR) details. Now the evaluation function returns both the dataframe and the metrics factory object also.</li>
+  <li>I have also edited the tutorial notebook to show the precision-recall curve.</li>
+  <li>In the UI also, I have added showing the added metrics in the summary and also plotted the precision-recall curve.</li>
+</ul>
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-08-11-Week-10/PR.png" alt="Precision-Recall Curve" style="width: 60%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 16px;" />
+</div>
+<div style="text-align: center;">
+  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-08-11-Week-10/DF.png" alt="Results DataFrame" style="width: 60%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
+<ul>
+  <li>Later I started concentrating on refining the UI. Last week I have tried adding a collapsible input section in evaluator tab where the user can also edit the values that are preloaded from the other tabs. But when I was testing the flow, it had a lot of issues since having to create another pipeline again to take the values in. So for now, I have reverted the respective UI changes and kept the older version of it.</li>
+  <li>The idea I have in mind right now is that I could probably get the values from dataset and inference tabs and if they are absent only then I can display the collapsible section in evaluator tab for the user to give the inputs without switching tabs. I will discuss this idea with the mentors this week and proceed with the changes.</li>
+  <li>I have also done a bit of testing. I found that after adding the support to add progress bar in the UI, evaluating for a batch size of more than 1 is failing. I need to look more into the issue and fix it this week.</li>
+  <li>Since I got sick towards the end of the week, I couldn’t finish adding the evaluation step parameter to show the results live while evaluation is still processing. I will take it up this week.</li>
+</ul>
+
+<hr />
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>Fixing the issues found</li>
+  <li>Adding evaluation step parameter to show live results</li>
+  <li>Documentation</li>
+</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 9 (Jul 29 - Aug 4)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/" rel="alternate" type="text/html" title="Week 9 (Jul 29 - Aug 4)" /><published>2025-08-04T00:00:00+05:30</published><updated>2025-08-04T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-9/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
   <li>I started with showing them the UI enhancements that I made and updating the progress that I have made regarding reducing the loading time in the UI.</li>
@@ -488,72 +545,4 @@ pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'
 
 <h2 id="going-ahead">Going ahead</h2>
 
-<p>I plan to thoroughly test all the changes I have made. If everything is alright I am thinking defining coco.py and pascalvoc.py could be a potential next step. I also didn’t get much time to explore streamlit this week, hoping to do that as well this coming week.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Community Bonding Week-2</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/" rel="alternate" type="text/html" title="Community Bonding Week-2" /><published>2025-05-30T00:00:00+05:30</published><updated>2025-05-30T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Community-Bonding-Week-2/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>Started this week with the usual weekly sync up with the mentors, where we discussed various aspects of the project and my progress so far.  David encouraged me to play around a bit with the datasets, download, parse and implement inference, even if it’s simple at this stage.</p>
-
-<p>Sergio highlighted the importance of understanding the input and output formats of the models, and how crucial it is to be able to handle these effectively to extract meaningful metrics. He pointed out that knowing the format of the dataset and how they are passed to the models are crucial for the project over internal workings of each model layer. Santiago shared a helpful insight that any complex computer vision problem can be broken down into smaller subproblems of classification or regression. And finally, david addressed the elephant in the room — we all learned how to pronounce each other’s names correctly yay!</p>
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Go through different dataset formats.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Download the datasets and parse them.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Use a portion of a COCO dataset to implement inference</li>
-</ul>
-
-<h2 id="progress">Progress</h2>
-
-<p>This week was all about exploring dataset formats and getting hands-on with them. I started with the COCO dataset and downloaded the 2017 validation images, training images, and the 2017 Train/Val annotations from the <a href="https://cocodataset.org/#download">official COCO website</a>. My goal was to understand how the dataset is structured, how the annotations are stored, and how to work with them effectively.</p>
-
-<p>I referred to the <a href="https://cocodataset.org/#format-data">COCO data format documentation</a> to dive deeper into the annotation structure. The main <code class="language-plaintext highlighter-rouge">annotations.json</code> file contains several top-level keys: <code class="language-plaintext highlighter-rouge">info</code>, <code class="language-plaintext highlighter-rouge">licenses</code>, <code class="language-plaintext highlighter-rouge">images</code>, <code class="language-plaintext highlighter-rouge">annotations</code>, and <code class="language-plaintext highlighter-rouge">categories</code>. Each object in the <code class="language-plaintext highlighter-rouge">annotations</code> list typically includes fields such as <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">image_id</code>, <code class="language-plaintext highlighter-rouge">category_id</code>, <code class="language-plaintext highlighter-rouge">bbox</code>, <code class="language-plaintext highlighter-rouge">area</code>, and <code class="language-plaintext highlighter-rouge">iscrowd</code>. The <code class="language-plaintext highlighter-rouge">bbox</code> is formatted as <code class="language-plaintext highlighter-rouge">[x, y, width, height]</code>, where <code class="language-plaintext highlighter-rouge">(x, y)</code> marks the top-left corner of the bounding box. To understand this better, I started mapping the annotations to their corresponding images and visualizing them with bounding boxes in a notebook called <a href="https://github.com/TheRoboticsClub/gsoc2025-Sakhineti_Praveena/tree/main/demos/coco.ipynb">coco.ipynb</a>.</p>
-
-<p>Initially, I redundantly mapped the annotations to images in <a href="https://github.com/TheRoboticsClub/gsoc2025-Sakhineti_Praveena/tree/main/demos/coco.ipynb">coco.ipynb</a>. But later, I discovered the official COCO API, which simplifies the process of loading, parsing, and visualizing annotations. It was a bit humbling to realize how much easier things could have been — but also a valuable lesson in finding the right tools. With this understanding, I proceeded to implement a simple object detection pipeline <a href="https://github.com/TheRoboticsClub/gsoc2025-Sakhineti_Praveena/tree/main/demos/detection_coco.ipynb">detection_coco.ipynb</a>, using a pretrained Faster R-CNN model from TorchVision. I ran inference on a small subset of 10 images from the COCO dataset to test how everything worked together, below is an image I populated inference for.</p>
-
-<figure>
-  <picture>
-    <!-- Auto scaling with imagemagick -->
-    <!--
-      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
-      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
-    -->
-    
-      
-        <source class="responsive-img-srcset" srcset="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/objDetection-480.webp 480w,/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/objDetection-800.webp 800w,/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/objDetection-1400.webp 1400w," type="image/webp" sizes="95vw" />
-      
-    
-    <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/objDetection.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-  </picture>
-
-  
-</figure>
-
-<p>Following that, I explored the Pascal VOC dataset. I downloaded the 2012 training and validation sets from the <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2012/">official VOC site</a>. Unlike COCO, VOC uses separate XML files for each image to store annotations. Each file contains object instances with tags like <code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> for the class label, <code class="language-plaintext highlighter-rouge">&lt;difficult&gt;</code> (a flag to indicate whether the object should be considered in evaluation), and <code class="language-plaintext highlighter-rouge">&lt;bndbox&gt;</code>, which specifies the bounding box coordinates in the format <code class="language-plaintext highlighter-rouge">(xmin, ymin, xmax, ymax)</code>. I parsed and visualized several VOC images in a separate notebook  <a href="https://github.com/TheRoboticsClub/gsoc2025-Sakhineti_Praveena/tree/main/demos/PascalVoc.ipynb">PascalVoc.ipynb</a>. I also came across a useful <a href="https://github.com/shiyemin/voc2coco/blob/master/voc2coco.py">script</a> to convert VOC annotations to COCO format.</p>
-
-<p>In addition, I briefly explored the YOLO dataset format. YOLO annotations are stored in <code class="language-plaintext highlighter-rouge">.txt</code> files, one per image, with each line containing five values: <code class="language-plaintext highlighter-rouge">&lt;class_id&gt; &lt;x_center&gt; &lt;y_center&gt; &lt;width&gt; &lt;height&gt;</code>, all normalized between 0 and 1 relative to the image dimensions. The format is simple and optimized for real-time detection.</p>
-
-<p>Finally, towards the end of the week, I began exploring <code class="language-plaintext highlighter-rouge">Streamlit</code>, a lightweight framework for building data apps in Python. Although I didn’t get the chance to complete a working GUI yet, I managed to grasp the basics — which I plan to build on in the coming weeks as I move toward creating a user-friendly interface for visualizing model outputs.</p>
-
-<h2 id="gsoc25-jderobot-kickoff-meeting-2905">GSoC’25 JdeRobot Kickoff Meeting (29/05)</h2>
-
-<p>This week, I had the GSoC’25 kickoff meeting for JdeRobot, where I got to meet my fellow contributors, mentors, and the org admins. Pedro Arias began the session with a quick overview of JdeRobot, highlighting its main focus areas — robotics education, AI-driven robotics, and robot programming tools. It was inspiring to see how wide-ranging and impactful the organization’s work is.</p>
-
-<figure>
-  <picture>
-    <!-- Auto scaling with imagemagick -->
-    <!--
-      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
-      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
-    -->
-    
-      
-        <source class="responsive-img-srcset" srcset="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/kickoffmeeting-480.webp 480w,/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/kickoffmeeting-800.webp 800w,/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/kickoffmeeting-1400.webp 1400w," type="image/webp" sizes="95vw" />
-      
-    
-    <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-05-30-Community-Bonding-Week-2/kickoffmeeting.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-  </picture>
-
-  
-</figure>
-
-<p>We then had a round of introductions, which was a great way to connect with like-minded people working on exciting and diverse projects. Following that, Pedro shared some helpful insights into the work methodologies we’ll be following, including contribution guidelines and evaluation timelines. David also gave us an important reminder to be proactive, not just during our weekly check-ins but throughout the week — by sharing timely updates, asking questions, and staying engaged. I will make sure to keep that in mind. He reassured us that no question is too small or silly. Overall it was a really helpful session to kick things off!</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
+<p>I plan to thoroughly test all the changes I have made. If everything is alright I am thinking defining coco.py and pascalvoc.py could be a potential next step. I also didn’t get much time to explore streamlit this week, hoping to do that as well this coming week.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
