@@ -1,5 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-12T18:53:45+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 10 (Aug 4 - Aug 11)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/" rel="alternate" type="text/html" title="Week 10 (Aug 4 - Aug 11)" /><published>2025-08-11T00:00:00+05:30</published><updated>2025-08-11T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-22T17:56:31+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Week 11 (Aug 12 - Aug 22)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/" rel="alternate" type="text/html" title="Week 11 (Aug 12 - Aug 22)" /><published>2025-08-22T00:00:00+05:30</published><updated>2025-08-22T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+
+<ul>
+  <li>I started with telling them the idea I have regarding giving the option for the user to upload the details in evaluator tab only when the data isn’t provided in dataset tab and model tab. This is to avoid having multiple places for user to give the details. The mentors agreed with this approach.</li>
+  <li>And later I showed them the UI, David told that the UI is clean. He suggested to also add a downloadable file with precision-recall curve points.</li>
+  <li>I discussed about the issue I found when the batch size is more than one too.</li>
+  <li>Then I asked them regarding the documentation guidelines. David suggested that I go through the existing documentation and start including the info regarding detection as well. Sergio suggested that I can do a demo video showing the UI and the steps to use the tool.</li>
+</ul>
+
+<hr />
+
+<h2 id="to-do-for-this-week">To Do for This Week</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Adding collapsable section to upload inputs details in UI</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Fixing issue with batch size &gt; 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Adding evaluation step to show live results</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Add precision-recall points as a downloadable file as well</li>
+</ul>
+
+<hr />
+
+<h2 id="progress">Progress</h2>
+
+<ul>
+  <li>First I started with working on updating the UI to improve model/dataset selection. I wanted to modify it in a way that there is only one place where the user can provide the dataset/model details. I wanted to avoid having multiple or different places where the user can give the details. I thought it would be better if there is a single pipeline for initiating the dataset and model objects which can be used across all the tabs. So having a persistent section that is common across all three tabs where we take all the user inputs seemed like the perfect solution. I discussed this idea with the mentors and started exploring the UI options.</li>
+  <li>I created a sidebar drawer in the UI where the user can give the dataset and model details. I moved the tabs to a single row on the main UI horizontally for a clean UI. I have removed the input section in the dataset and inference tabs. When the user is yet to give the inputs the tabs will show a warning banner asking the user to provide the necessary details. When the details are given the dataset tab will show the image grid along with the search button for the user to even select the image from the drop down. In inference tab (given that the user provided the model details) an image uploader will be shown where the user can upload the image and run inference on it. In evaluator tab when both dataset and model details are given, the run evaluation button gets enabled and clicking on that will run the evaluation.</li>
+</ul>
+<video width="640" height="360" controls="">
+  <source src="/gsoc2025-Sakhineti_Praveena/assets/video/22Aug.mov" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+<ul>
+  <li>Then I started working on showing the live results when the user provides evaluation step in the model config file. I included another input parameter in the model config called “evaluation_step”. The results in the UI will be updated for each step size. I have added a parameter called metrics_callback, which is the feedback given to the streamlit UI for the values on the screen to be updated.</li>
+  <li>I also added the precision recall curve points as a downloadable csv file.</li>
+  <li>Later I spent some time resolving the issue regarding batch size &gt; 1. The issue is there only in case of streamlit, the normal sample notebook is giving results for batch size &gt; 1. This is mostly because of the multiprocessing and pickling limitations in streamlit. I tried a couple of work arounds and it still didn’t seem to work. For now I have modified the logic in a way that, when it is called from streamlit UI, I am making num_workers as 0 in the DataLoader. If not I assign the batch size value to the num_workers in DataLoader. It is working for now that it will show the results. But for the processing time to decrease in the UI, I still need to look into the issue further and find a fix.</li>
+</ul>
+
+<hr />
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<ul>
+  <li>Fix the multiprocessing issue in streamlit UI</li>
+  <li>Documentation</li>
+</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 10 (Aug 4 - Aug 11)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/" rel="alternate" type="text/html" title="Week 10 (Aug 4 - Aug 11)" /><published>2025-08-11T00:00:00+05:30</published><updated>2025-08-11T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-10/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
   <li>I met with Sergio this week. I started with showing him what I have about the evaluator tab. Towards the end of last week, I actually explored having the dataset and model saved from the other two tabs and being able to run the evaluation on those. I showed him the approach I tried where we get the data from the other two tabs but also let the user edit them.</li>
@@ -496,53 +541,4 @@ pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'
   <li>Complete the Torch detection model integration</li>
   <li>Add the metrics evaluation part for detection</li>
   <li>Add an end-to-end example with COCO + Torch detection</li>
-</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 1 (Jun 01 - Jun 08)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/" rel="alternate" type="text/html" title="Week 1 (Jun 01 - Jun 08)" /><published>2025-06-09T00:00:00+05:30</published><updated>2025-06-09T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-1/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>This week, we discussed the implementation plan in more detail. David suggested that I start with refactoring the <code class="language-plaintext highlighter-rouge">dataset.py</code> module as a solid entry point into the codebase. Once that is complete, I can gradually move on to refactoring the model class and metrics module.</p>
-
-<p>They also encouraged me to open a draft PR early so that my progress can be continuously reviewed and improved. David also mentioned an exciting use case for our tool: it will be used to evaluate a trash detection model, making the detection metrics we build directly impactful.</p>
-
-<hr />
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Refactor dataset.py</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Refactor model.py</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Explore Streamlit (if time permits)</li>
-</ul>
-
-<hr />
-
-<h2 id="progress">Progress</h2>
-
-<p>I started this week by refactoring the dataset classes. I followed the structure David and I had discussed during the application stage.</p>
-
-<p>The older class structure looked like this:</p>
-
-<div style="text-align: center;">
-  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/oldclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
-</div>
-
-<p>To support detection models more effectively, I’ve reorganized the class hierarchy:</p>
-
-<div style="text-align: center;">
-  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/newclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
-</div>
-
-<p>I began by identifying the common functionalities shared between segmentation and detection tasks. These were moved into a new base class, <code class="language-plaintext highlighter-rouge">PerceptionDataset</code>. In this class, I’ve implemented methods like: <code class="language-plaintext highlighter-rouge">__init__</code> , <code class="language-plaintext highlighter-rouge">__len__</code> , <code class="language-plaintext highlighter-rouge">make_fname_global</code> and <code class="language-plaintext highlighter-rouge">append</code> (assuming the ontology structure is the same as segmentation for now)</p>
-
-<p>If there is some extra info per class in the datasets, the logic in <code class="language-plaintext highlighter-rouge">append</code> can be overridden later in the <code class="language-plaintext highlighter-rouge">DetectionDataset</code> class.</p>
-
-<p>Next, I defined the functions specific to segmentation and detection within their respective subclasses. I also incorporated some of the model refactoring work I had prepared during the application phase and finished up the changes.</p>
-
-<p>I’ve raised a <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312"><strong>draft PR</strong></a> that includes all these changes. Following David’s suggestion, I split the monolithic class into multiple files to improve modularity and maintainability.</p>
-<div style="text-align: center;">
-  <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/filestructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
-</div>
-
-<hr />
-
-<h2 id="going-ahead">Going ahead</h2>
-
-<p>I plan to thoroughly test all the changes I have made. If everything is alright I am thinking defining coco.py and pascalvoc.py could be a potential next step. I also didn’t get much time to explore streamlit this week, hoping to do that as well this coming week.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
+</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
