@@ -1,5 +1,224 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-22T17:56:31+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
-</subtitle><entry><title type="html">Week 11 (Aug 12 - Aug 22)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/" rel="alternate" type="text/html" title="Week 11 (Aug 12 - Aug 22)" /><published>2025-08-22T00:00:00+05:30</published><updated>2025-08-22T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-09-01T00:24:42+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/feed.xml</id><title type="html">Sakhineti Praveena | JdeRobot x GSoC2025</title><subtitle>Sakhineti Praveena | JdeRobot x GSoC2025
+</subtitle><entry><title type="html">Final Report</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Final-report/" rel="alternate" type="text/html" title="Final Report" /><published>2025-08-31T00:00:00+05:30</published><updated>2025-08-31T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Final-report</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Final-report/"><![CDATA[<hr />
+
+<h1 id="detectionmetrics-gui-ci-workflow-and-object-detection">DetectionMetrics: GUI, CI Workflow, and Object Detection</h1>
+
+<hr />
+
+<p><strong>Organization:</strong> <a href="https://jderobot.github.io/">JdeRobot</a></p>
+
+<p><strong>Contributor:</strong> <a href="https://in.linkedin.com/in/sakhinetipraveena">Sakhineti Praveena</a></p>
+
+<p><strong>Mentors:</strong> David Pascual Hernández, Sergio Paniego, Santiago Montiel Marín</p>
+
+<p><strong>GSoC Project Page:</strong> <a href="https://summerofcode.withgoogle.com/programs/2025/projects/lKrxCeUr">DetectionMetrics: GUI, CI Workflow, and Object Detection</a></p>
+
+<hr />
+
+<p>Hello everyone,</p>
+
+<p>This report documents my journey through Google Summer of Code 2025 with <a href="https://jderobot.github.io/">JdeRobot</a>. This summer, I had the opportunity to contribute to <a href="https://jderobot.github.io/DetectionMetrics/">DetectionMetrics</a>, an open-source toolkit for evaluating perception models across frameworks and datasets. My project focused on extending DetectionMetrics to support object detection models, building a more intuitive graphical user interface, and establishing a robust continuous integration (CI) workflow to streamline development and ensure code quality.</p>
+
+<hr />
+
+<h3 id="about-me">About me</h3>
+
+<p>I am currently working as an application developer with almost 2.5 years of professional experience. Google Summer of Code 2025 was my first major open-source experience, and it has been both exciting and rewarding. Working with the JdeRobot community and my mentors has helped me grow as a developer and deepen my understanding of perception model evaluation.</p>
+
+<hr />
+
+<h3 id="project-summary">Project Summary</h3>
+
+<p><strong>DetectionMetrics</strong> is a toolkit for evaluating perception models across frameworks and datasets. Past GSoC projects (Vinay Sharma, Jeevan Kumar) contributed to its first stable release, published in Sensors (Paniego et al., 2022). The tool was recently revamped to improve usability and installation. DetectionMetrics functioned as both a Python library and CLI, focusing on the quantitative evaluation of image and LiDAR segmentation models, with plans to expand into object detection. It supported PyTorch and TensorFlow models, along with multiple public datasets. Its modular design allowed easy integration of new models and datasets.</p>
+
+<p>While redesigning the core functionality, some useful features were lost. This project aimed to bring them back and enhance DetectionMetrics by:</p>
+
+<ol>
+  <li>
+    <p><strong>Recovering object detection evaluation support</strong>, including metrics like mAP and IoU. This involved restoring compatibility with COCO-style datasets and implementing necessary pipeline adjustments.</p>
+  </li>
+  <li>
+    <p><strong>Building a GUI for visualizing dataset samples</strong>  and evaluation results (IoU, confusion matrices, etc.). The GUI provides an interactive interface for launching batched evaluation jobs using Streamlit.</p>
+  </li>
+  <li>
+    <p><strong>Setting up a Continuous Integration (CI) workflow</strong> to automate testing, documentation generation, and versioning using Sphinx, pytest, and GitHub Actions.</p>
+  </li>
+</ol>
+
+<hr />
+<h3 id="contribution-summary">Contribution Summary</h3>
+
+<h4 id="stage-1-object-detection-pipeline-development">Stage 1: Object Detection Pipeline Development</h4>
+
+<p>In this phase I focused on building a comprehensive object detection evaluation pipeline. Since the segmentation classes already existed, I had to redesign the classes in a way that ensured minimum code repetition.</p>
+
+<ul>
+  <li><strong>Dataset Class Refactoring</strong>: Restructured the monolithic dataset class into a modular hierarchy with a base <code class="language-plaintext highlighter-rouge">PerceptionDataset</code> class and specialized <code class="language-plaintext highlighter-rouge">SegmentationDataset</code> and <code class="language-plaintext highlighter-rouge">DetectionDataset</code> subclasses. The same has been done for the model classes as well.</li>
+</ul>
+
+<div style="display: flex; gap: 40px; align-items: flex-start;">
+  <div style="text-align: center;">
+    <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/oldclassstructure.png" alt="Old Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+    <p style="margin-top: 8px; font-weight: bold;">Old Class Structure</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="/gsoc2025-Sakhineti_Praveena/assets/img/blog/2025-06-09-Week-1/newclassstructure.png" alt="New Class Structure" style="width: 50%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+    <p style="margin-top: 8px; font-weight: bold;">New Class Structure</p>
+  </div>
+</div>
+
+<ul>
+  <li><strong>COCO Dataset Integration</strong>: Created <code class="language-plaintext highlighter-rouge">CocoDataset</code> class with proper ontology mapping and annotation processing. Handled cross-platform compatibility issues with <code class="language-plaintext highlighter-rouge">pycocotools</code> for Windows systems.</li>
+  <li><strong>Torch Detection Model Support</strong>: Created <code class="language-plaintext highlighter-rouge">torch_detection.py</code> to support detection models, adapting data processing methods for detection-specific input formats (<code class="language-plaintext highlighter-rouge">List[Dict[str, Tensor]]</code>).</li>
+  <li><strong>Detection Metrics Factory</strong>: Implemented <code class="language-plaintext highlighter-rouge">DetectionMetricsFactory</code> class that computes per-class metrics (AP, Precision, Recall, TP, FP, FN) and returns results in a pandas DataFrame with mAP.</li>
+</ul>
+
+<p>By the end of this stage, the object detection evaluation pipeline was fully functional as a Python library. To demonstrate its capabilities, I also created a sample Jupyter notebook, which walks users through the evaluation process step by step. You can view the notebook here: <a href="https://github.com/JdeRobot/DetectionMetrics/blob/master/examples/tutorial_image_detection.ipynb">tutorial_image_detection.ipynb</a>.</p>
+
+<h4 id="stage-2-gui-development">Stage 2: GUI Development</h4>
+
+<p>In this stage I focused on another major part of the project, designing and implementing a user-friendly, interactive GUI using Streamlit.</p>
+
+<p>The GUI features a persistent sidebar for entering dataset and model details, which remains accessible across all tabs. This unified input system streamlines the workflow and ensures consistency, while warning banners and tooltips guide users to provide any missing information required for each stage. The main interface is organized into three main tabs, each tailored to a specific stage of the model evaluation workflow:</p>
+
+<ul>
+  <li><strong>Dataset Viewer Tab</strong>:<br />
+This tab allows users to explore and inspect the loaded dataset in detail. Users can:
+    <ul>
+      <li>Browse through individual samples using navigation controls (next/previous buttons and image index selection).</li>
+      <li>Visualize images with overlaid ground truth bounding boxes, each class color-coded for clarity.</li>
+      <li>View annotation details such as class labels, bounding box coordinates, and image metadata.</li>
+      <li>Search for specific images by filename.</li>
+      <li>The tab is designed to help users verify dataset integrity and annotation correctness before running evaluations.</li>
+    </ul>
+  </li>
+  <li><strong>Inference Tab</strong>:<br />
+The inference tab provides an interface for running the selected detection model on custom images. Key features include:
+    <ul>
+      <li>Uploading one or more images for inference, either by selecting from the dataset or uploading new files.</li>
+      <li>Configuring model parameters (e.g., confidence threshold, NMS threshold) directly from the sidebar.</li>
+      <li>Visualizing inference results with predicted bounding boxes, class labels, and confidence scores overlaid on the images.</li>
+      <li>Comparing predictions with ground truth annotations (if available) for qualitative assessment.</li>
+      <li>Exporting inference results as JSON files for further analysis or integration with other tools.</li>
+    </ul>
+  </li>
+  <li><strong>Evaluator Tab</strong>:<br />
+This tab is dedicated to comprehensive model evaluation and result analysis. Its features include:
+    <ul>
+      <li>Real-time progress tracking with a progress bar and status updates.</li>
+      <li>Displaying evaluation metrics such as mAP@0.5, mAP@0.5:0.95, per-class AP, precision, recall, and F1-score in tabular format.</li>
+      <li>Visualizing precision-recall curves, with the option to download the curve data as CSV.</li>
+      <li>Exporting the full evaluation results as CSV files for reporting or further processing.</li>
+      <li>The tab also supports live updates of metrics if the model supports step-wise evaluation, allowing users to monitor performance as evaluation progresses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="stage-3-performance-optimization-and-integration">Stage 3: Performance Optimization and Integration</h4>
+
+<p>Focused on optimizing performance and ensuring seamless integration:</p>
+
+<ul>
+  <li><strong>Loading Time Optimization</strong>: Reduced dataset loading from 42 seconds to 11 seconds through strategic caching and session state management.</li>
+  <li><strong>Inference Performance</strong>: Fixed inference slowdowns, achieving 2-3 second initial load times and sub-second subsequent loads.</li>
+  <li><strong>Advanced Metrics</strong>: Implemented mAP@0.5:0.95 with step size 0.05 and Area Under Curve (AUC) for precision-recall curves. Also included plotting precision-recall curve in the evaluator tab.</li>
+  <li><strong>Unified UI Design</strong>: Created a sidebar-based input system that persists across all tabs, eliminating redundant input sections.</li>
+</ul>
+
+<h4 id="stage-4--testing-and-documentation">Stage 4 : Testing and Documentation</h4>
+
+<p>During this stage, I devoted significant time and effort to thoroughly test both the Python library and the GUI, ensuring robust functionality across a wide range of scenarios and edge cases. This comprehensive testing process allowed me to identify and resolve several minor bugs, further improving the stability and reliability of the system. In the final week, my focus shifted to documentation. I updated and expanded the user guide, which is maintained within the DetectionMetrics repository, to provide reference material for end users. This ensures that new users can easily understand and utilize all the features developed during the project.</p>
+
+<hr />
+
+<h3 id="on-github">On GitHub</h3>
+
+<p>Over the summer, I submitted 3 major pull requests that have been merged, each representing significant milestones and progress throughout the project. Below is a detailed breakdown of the work accomplished week by week, with each row highlighting a distinct contribution or enhancement:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Pull Request</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>More</strong></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/JdeRobot/DetectionMetrics/pull/312">#312</a></td>
+      <td>Initial implementation of object detection evaluation pipeline: COCO-format dataset support, PyTorch model integration, and core metric computation (mAP, precision, recall).</td>
+      <td><a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week1/">Week 1</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week2/">Week 2</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/JdeRobot/DetectionMetrics/pull/312">#312</a></td>
+      <td>Added example Jupyter notebook for object detection evaluation; fixed bugs in dataset loading and metric calculation. Finalized object detection pipeline, improved dataset handling, and prepared for GUI integration.</td>
+      <td><a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week3/">Week 3</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week4/">Week 4</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/JdeRobot/DetectionMetrics/pull/318">#318</a></td>
+      <td>Initial Streamlit GUI: dataset viewer tab, image navigation, and annotation visualization. Added inference tab: model upload, parameter configuration, and inference visualization.</td>
+      <td><a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week5/">Week 5</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week6/">Week 6</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week7/">Week 7</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/JdeRobot/DetectionMetrics/pull/318">#318</a></td>
+      <td>Performance optimizations: reduced dataset loading and inference times, improved session state management. Bug fixes and UI refinements: persistent sidebar, tooltips, warning banners, and improved user experience.</td>
+      <td><a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week8/">Week 8</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week9/">Week 9</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week10/">Week 10</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/JdeRobot/DetectionMetrics/pull/319">#319</a></td>
+      <td>Enhanced GUI: evaluator tab with real-time metrics and persistent sidebar. Comprehensive documentation: updated user guide, and usage tutorials for both library and GUI.</td>
+      <td><a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week11/">Week 11</a>, <a href="https://theroboticsclub.github.io/gsoc2025-Sakhineti_Praveena/blog/2025/week12/">Week 12</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="demo-video">Demo Video</h3>
+
+<p><img src="/gsoc2025-Sakhineti_Praveena/assets/video/GUI_Demo.mp4" alt="Final Demo Video" /></p>
+
+<hr />
+
+<h3 id="future-work">Future Work</h3>
+
+<p>The foundation built during this project paves the way for a wide range of exciting enhancements and new features. Here are some promising directions for future development:</p>
+
+<h4 id="1-pipeline-and-backend-improvements">1. Pipeline and Backend Improvements</h4>
+<ul>
+  <li><strong>Broader Framework Support:</strong><br />
+Expand compatibility to include additional model frameworks such as TensorFlow, YOLO, and ONNX, as well as support for more dataset formats like Pascal VOC and LabelMe.</li>
+  <li><strong>Modular Metrics Architecture:</strong><br />
+Refactor the metrics factory classes to follow a more modular and extensible design, mirroring the structure used for datasets and model classes. This will make it easier to add new metrics or evaluation strategies in the future.</li>
+  <li><strong>Extensive Tutorials and Templates:</strong><br />
+Expand documentation with more real-world examples, video walkthroughs, and ready-to-use templates for common workflows.</li>
+</ul>
+
+<h4 id="2-user-interface-enhancements">2. User Interface Enhancements</h4>
+<ul>
+  <li><strong>Advanced Filtering and Visualization:</strong><br />
+In the dataset viewer and inference tabs, add options to filter and visualize ground truth and predicted bounding boxes by class, confidence score, or other attributes.</li>
+  <li><strong>Performance Optimization:</strong><br />
+Further reduce computation time, especially when live progress tracking is enabled in the evaluator tab, by leveraging asynchronous processing or background workers.</li>
+  <li><strong>Ground Truth vs. Inference Comparison:</strong><br />
+Integrate side-by-side or overlay visualizations to directly compare ground truth annotations with model predictions in both the inference and evaluator tabs.</li>
+  <li><strong>Model Comparison Tools:</strong><br />
+Develop a dedicated comparison tab where users can upload and compare evaluation results from multiple models, including side-by-side metric tables and visualizations.</li>
+</ul>
+
+<hr />
+
+<p>These enhancements will not only broaden the applicability of the tool but also make it more powerful, user-friendly, and adaptable to the evolving needs of the computer vision community. I look forward to seeing how the project grows and how the community builds upon this foundation!</p>
+
+<hr />
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Participating in Google Summer of Code 2025 with JdeRobot has been an incredibly rewarding and transformative journey. Working on this project allowed me to deeply explore computer vision and model evaluation, helping me develop a strong understanding of object detection metrics, dataset management, and modern web application development. Throughout the summer, I significantly improved my skills in computer vision, UI/UX design, and effective collaboration within a distributed team.</p>
+
+<p>Beyond the technical growth, GSoC connected me with the vibrant and supportive open-source community at JdeRobot. I am especially grateful to my mentors—David, Sergio, and Santiago—who supported me throughout the summer. Their continuous guidance made a huge difference to the project. I am also deeply thankful to the JdeRobot administrators for giving me this wonderful opportunity.</p>
+
+<p>This experience has been a fgreat kick-start for my open-source journey, and I am excited to see what the future holds. Thank you for following along!</p>
+
+<hr />]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Week 11 (Aug 12 - Aug 22)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/" rel="alternate" type="text/html" title="Week 11 (Aug 12 - Aug 22)" /><published>2025-08-22T00:00:00+05:30</published><updated>2025-08-22T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-11/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
 
 <ul>
   <li>I started with telling them the idea I have regarding giving the option for the user to upload the details in evaluator tab only when the data isn’t provided in dataset tab and model tab. This is to avoid having multiple places for user to give the details. The mentors agreed with this approach.</li>
@@ -474,71 +693,4 @@ Streamlit
 
 <h3 id="whats-next">What’s Next?</h3>
 
-<p>For the upcoming week, I’ll work on testing my code changes end-to-end. Fix any errors I face along the way. I will aim to finish the example notebook I started working on. And based on the suggestion from the mentors regarding which UI framework to use, I’ll also start prototyping the user interface.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry><entry><title type="html">Week 2 (Jun 09 - Jun 15)</title><link href="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/" rel="alternate" type="text/html" title="Week 2 (Jun 09 - Jun 15)" /><published>2025-06-16T00:00:00+05:30</published><updated>2025-06-16T00:00:00+05:30</updated><id>http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2</id><content type="html" xml:base="http://localhost:4000/gsoc2025-Sakhineti_Praveena/blog/2025/Week-2/"><![CDATA[<h2 id="meeting-with-mentors">Meeting with Mentors</h2>
-
-<p>We discussed about the progress made in the previous week where I have refactored dataset and model classes. I also raised an issue I encountered during testing: in one of the examples, the inference output appeared distorted compared to earlier results. David mentioned he would look into it on his end(which was fixed later that week through <a href="https://github.com/JdeRobot/DetectionMetrics/pull/314">Issue #314</a>).</p>
-
-<p>Another topic was the current file structure. Right now, both the <code class="language-plaintext highlighter-rouge">dataset</code> and <code class="language-plaintext highlighter-rouge">model</code> directories have a lot of files, and David suggested we may consider restructuring them later as the project evolves. Overall, the feedback from mentors was positive, and we moved ahead with planning goals for the coming week.</p>
-
-<hr />
-
-<h2 id="this-weeks-to-do">This Week’s To-Do</h2>
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Add support for COCO dataset</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Add support for Torch detection models (Partially done)</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Explore Streamlit if time permits</li>
-</ul>
-
-<hr />
-
-<h2 id="progress">Progress</h2>
-
-<h4 id="coco-dataset-support">COCO Dataset Support</h4>
-
-<ul>
-  <li>I started by creating <code class="language-plaintext highlighter-rouge">coco.py</code>, which includes a <code class="language-plaintext highlighter-rouge">CocoDataset</code> class derived from <code class="language-plaintext highlighter-rouge">ImageDetectionDataset</code>.</li>
-  <li>I was spending some time to check if I should use pycocotools or write our own parsing logic.  Some GitHub <a href="https://github.com/cocodataset/cocoapi/issues/169">issues</a> pointed out that the official <code class="language-plaintext highlighter-rouge">pycocotools</code> is not Windows-friendly.</li>
-  <li>We found a <a href="https://github.com/cocodataset/cocoapi/issues/415#issuecomment-627313816">workaround</a> using <code class="language-plaintext highlighter-rouge">pycocotools-windows</code> for Windows machines. After discussing with mentors, we decided to handle installation conditionally. David also confirmed by installing the library in his windows machine. I have handled the installation in pyproject.toml like shown in the code below using this snippet:</li>
-</ul>
-
-<pre> pycocotools = { version = "^2.0.7", markers = "sys_platform != 'win32'" }
-pycocotools-windows = { version = "^2.0.0.2", markers = "sys_platform == 'win32'" }</pre>
-
-<ul>
-  <li>Within the <code class="language-plaintext highlighter-rouge">CocoDataset</code> class:
-    <ul>
-      <li>_build_ontology() maps COCO category IDs to the framework’s format.</li>
-      <li>_build_dataframe() prepares the structure used by the base class.</li>
-      <li>read_annotation() processes annotations for each image based on image_id.</li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="torch-model-refactor">Torch Model Refactor</h4>
-
-<ul>
-  <li>I renamed <code class="language-plaintext highlighter-rouge">torch.py</code> to <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> and updated the imports across all example scripts accordingly.</li>
-  <li>Then I created <code class="language-plaintext highlighter-rouge">torch_detection.py</code> to support detection models.</li>
-  <li>Taking <code class="language-plaintext highlighter-rouge">torch_segmentation.py</code> as a reference, I modified:
-    <ul>
-      <li>data_to_device()</li>
-      <li>get_data_shape()</li>
-      <li>get_computational_cost()</li>
-    </ul>
-
-    <p>to account for the different input format used in detection: <code class="language-plaintext highlighter-rouge">List[Dict[str, Tensor]]</code>.</p>
-  </li>
-  <li>I wasn’t sure if unsqueeze_data() and the CustomResize class were necessary for detection, so I skipped them for now.</li>
-  <li>I was unwell on Tuesday and Wednesday and couldn’t make as much progress as I had planned. I couldn’t fully finish torch_detection.py this week. However, I’ve committed the partial changes in the <a href="https://github.com/JdeRobot/DetectionMetrics/pull/312">draft PR #312</a>.</li>
-</ul>
-
-<hr />
-
-<h2 id="going-ahead">Going ahead</h2>
-
-<p>Next week, I’ll aim to:</p>
-<ul>
-  <li>Complete the Torch detection model integration</li>
-  <li>Add the metrics evaluation part for detection</li>
-  <li>Add an end-to-end example with COCO + Torch detection</li>
-</ul>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
+<p>For the upcoming week, I’ll work on testing my code changes end-to-end. Fix any errors I face along the way. I will aim to finish the example notebook I started working on. And based on the suggestion from the mentors regarding which UI framework to use, I’ll also start prototyping the user interface.</p>]]></content><author><name>Sakhineti Praveena</name></author><category term="blog" /><summary type="html"><![CDATA[Meeting with Mentors]]></summary></entry></feed>
