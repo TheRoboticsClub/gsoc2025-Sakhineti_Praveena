@@ -143,7 +143,10 @@ Over the summer, I submitted 3 major pull requests that have been merged, each r
 
 ### Demo Video
 
-![Final Demo Video](/gsoc2025-Sakhineti_Praveena/assets/video/GUI_Demo.mp4)
+<video width="640" height="360" controls>
+  <source src="{{ '/assets/video/GSoCVideoFinal.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 
@@ -170,8 +173,6 @@ The foundation built during this project paves the way for a wide range of excit
   Develop a dedicated comparison tab where users can upload and compare evaluation results from multiple models, including side-by-side metric tables and visualizations.
 
 
----
-
 These enhancements will not only broaden the applicability of the tool but also make it more powerful, user-friendly, and adaptable to the evolving needs of the computer vision community. I look forward to seeing how the project grows and how the community builds upon this foundation!
 
 ---
@@ -184,4 +185,3 @@ Beyond the technical growth, GSoC connected me with the vibrant and supportive o
 
 This experience has been a fgreat kick-start for my open-source journey, and I am excited to see what the future holds. Thank you for following along!
 
----
